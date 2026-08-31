@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" role="img" aria-label="بدون تصویر">
+  <rect width="200" height="200" fill="#f1e8d2"/>
+  <g fill="none" stroke="#7cc487" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M100 55c22 0 40 16 40 42 0 30-24 48-40 48S60 127 60 97c0-26 18-42 40-42z"/>
+    <path d="M100 55c0-14 8-22 22-24-1 14-8 22-22 24z"/>
+    <path d="M100 92v40M84 108h32"/>
+  </g>
+</svg>
