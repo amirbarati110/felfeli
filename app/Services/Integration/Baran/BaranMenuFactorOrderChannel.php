@@ -6,7 +6,6 @@ use App\Models\Order;
 use App\Models\Setting;
 use App\Services\Integration\Contracts\OrderChannel;
 use App\Services\Integration\DTO\OrderPushResult;
-use Illuminate\Support\Facades\Http;
 
 /**
  * ثبت سفارش در نرم‌افزار حسابداری باران از طریق همان endpointی که «منوی آنلاین
@@ -69,36 +68,37 @@ class BaranMenuFactorOrderChannel implements OrderChannel
             ])->values()->all(),
         ];
 
-        $response = Http::baseUrl($this->baseUrl)
-            ->timeout($this->timeout)
-            ->withHeaders([
-                'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
+        $response = BaranTransport::postJson(
+            $this->baseUrl.'/api/SaveMenuFactor',
+            $payload,
+            [
                 'Referer' => 'https://menu.baransys.com/',
                 'Origin' => 'https://menu.baransys.com',
-            ])
-            ->post('/api/SaveMenuFactor', $payload);
+            ],
+            $this->timeout,
+        );
 
-        $body = (array) $response->json();
+        $body = (array) ($response['json'] ?? []);
+        $status = $response['status'];
         $resId = $body['ResId'] ?? null;
 
-        if (! $response->successful()) {
-            return OrderPushResult::fail('HTTP '.$response->status().' از باران', $payload, $body, $response->status());
+        if ($status < 200 || $status >= 300) {
+            return OrderPushResult::fail('HTTP '.$status.' از باران', $payload, $body ?: ['raw' => $response['body']], $status);
         }
 
         if ($resId !== null && (int) $resId < 0) {
-            return OrderPushResult::fail($body['ResMessage'] ?? 'باران سفارش را رد کرد', $payload, $body, $response->status());
+            return OrderPushResult::fail($body['ResMessage'] ?? 'باران سفارش را رد کرد', $payload, $body, $status);
         }
 
         if (empty($resId) && empty($body['FactorId'])) {
-            return OrderPushResult::fail($body['ResMessage'] ?? 'پاسخ نامشخص از باران', $payload, $body, $response->status());
+            return OrderPushResult::fail($body['ResMessage'] ?? 'پاسخ نامشخص از باران', $payload, $body, $status);
         }
 
         return OrderPushResult::ok(
             reference: (string) ($body['ResId'] ?? $body['FactorId']),
             request: $payload,
             response: $body,
-            http: $response->status(),
+            http: $status,
         );
     }
 
