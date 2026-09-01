@@ -21,9 +21,11 @@ return [
     // fixture    = خواندن از فایل نمونه‌ی ذخیره‌شده (برای توسعه/تست بدون شبکه)
     'catalog_driver' => env('INTEGRATION_CATALOG_DRIVER', 'baran_menu'),
 
-    // baran_api  = ارسال واقعی به API باران (نیازمند مستندات و توکن)
+    // baran_menu = ثبت واقعی فاکتور در باران از طریق endpoint منوی باران
+    //              (api/SaveMenuFactor) — بدون نیاز به API اختصاصی. هر سفارش
+    //              یک فاکتور واقعی در حسابداری می‌سازد؛ فقط پس از تست فعال شود.
+    // baran_api  = ارسال به API اختصاصی حسابداری باران (نیازمند مستندات و توکن)
     // simulate   = شبیه‌سازی موفق با شماره‌ی فاکتور ساختگی (پیش‌فرض فعلی)
-    // null/log   = فقط لاگ می‌کند و سفارش در وضعیت pending می‌ماند
     'order_driver' => env('INTEGRATION_ORDER_DRIVER', 'simulate'),
 
     'baran' => [
@@ -39,6 +41,10 @@ return [
 
         'timeout' => (int) env('BARAN_HTTP_TIMEOUT', 20),
         'retries' => (int) env('BARAN_HTTP_RETRIES', 2),
+
+        // برای درایور baran_menu (SaveMenuFactor)
+        'table_id' => (int) env('BARAN_TABLE_ID', 0),
+        'payment_type_id' => (int) env('BARAN_PAYMENT_TYPE_ID', 0),
     ],
 
     // مسیر فایل نمونه برای درایور fixture

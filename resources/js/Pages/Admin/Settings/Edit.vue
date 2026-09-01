@@ -25,7 +25,7 @@ const form = useForm({
     },
 });
 
-const input = 'h-11 w-full rounded-xl border-0 bg-cream-100 px-3 text-sm ring-1 ring-black/5 focus:ring-2 focus:ring-brand-400';
+const input = 'h-11 w-full rounded-xl border-0 bg-paper-100 px-3 text-sm ring-1 ring-black/5 focus:ring-2 focus:ring-herb-400';
 </script>
 
 <template>
@@ -40,8 +40,8 @@ const input = 'h-11 w-full rounded-xl border-0 bg-cream-100 px-3 text-sm ring-1 
                 <div class="space-y-3">
                     <div><label class="mb-1 block text-sm font-medium">نام فروشگاه *</label><input v-model="form.store.name" :class="input" /></div>
                     <div><label class="mb-1 block text-sm font-medium">تلفن</label><input v-model="form.store.phone" dir="ltr" :class="[input, 'text-right']" /></div>
-                    <div><label class="mb-1 block text-sm font-medium">درباره</label><textarea v-model="form.store.about" rows="2" class="w-full rounded-xl border-0 bg-cream-100 p-3 text-sm ring-1 ring-black/5" /></div>
-                    <div><label class="mb-1 block text-sm font-medium">ساعت کاری</label><textarea v-model="form.store.work_time" rows="3" class="w-full rounded-xl border-0 bg-cream-100 p-3 text-sm ring-1 ring-black/5" /></div>
+                    <div><label class="mb-1 block text-sm font-medium">درباره</label><textarea v-model="form.store.about" rows="2" class="w-full rounded-xl border-0 bg-paper-100 p-3 text-sm ring-1 ring-black/5" /></div>
+                    <div><label class="mb-1 block text-sm font-medium">ساعت کاری</label><textarea v-model="form.store.work_time" rows="3" class="w-full rounded-xl border-0 bg-paper-100 p-3 text-sm ring-1 ring-black/5" /></div>
                     <div><label class="mb-1 block text-sm font-medium">اینستاگرام</label><input v-model="form.store.instagram" dir="ltr" :class="[input, 'text-right']" /></div>
                     <div><label class="mb-1 block text-sm font-medium">لینک نقشه</label><input v-model="form.store.location_link" dir="ltr" :class="[input, 'text-right']" /></div>
                 </div>
@@ -52,14 +52,14 @@ const input = 'h-11 w-full rounded-xl border-0 bg-cream-100 px-3 text-sm ring-1 
                 <div class="space-y-3">
                     <div><label class="mb-1 block text-sm font-medium">هزینه ارسال در ساوه (ریال)</label><input v-model.number="form.checkout.delivery_fee" type="number" dir="ltr" :class="[input, 'text-right']" /></div>
                     <div><label class="mb-1 block text-sm font-medium">حداقل مبلغ سفارش (ریال)</label><input v-model.number="form.checkout.min_order_total" type="number" dir="ltr" :class="[input, 'text-right']" /></div>
-                    <div><label class="mb-1 block text-sm font-medium">پیام صفحه ثبت سفارش</label><textarea v-model="form.checkout.notice" rows="3" class="w-full rounded-xl border-0 bg-cream-100 p-3 text-sm ring-1 ring-black/5" /></div>
+                    <div><label class="mb-1 block text-sm font-medium">پیام صفحه ثبت سفارش</label><textarea v-model="form.checkout.notice" rows="3" class="w-full rounded-xl border-0 bg-paper-100 p-3 text-sm ring-1 ring-black/5" /></div>
                     <label class="flex items-center justify-between text-sm font-medium">ارسال در ساوه فعال<input v-model="form.checkout.delivery_enabled" type="checkbox" class="rounded" /></label>
                     <label class="flex items-center justify-between text-sm font-medium">دریافت حضوری فعال<input v-model="form.checkout.pickup_enabled" type="checkbox" class="rounded" /></label>
                 </div>
             </div>
 
             <div class="lg:col-span-2">
-                <button type="submit" :disabled="form.processing" class="rounded-full bg-brand-500 px-6 py-3 text-sm font-extrabold text-white disabled:opacity-60">
+                <button type="submit" :disabled="form.processing" class="rounded-full bg-herb-500 px-6 py-3 text-sm font-extrabold text-white disabled:opacity-60">
                     ذخیره تنظیمات
                 </button>
             </div>

@@ -5,8 +5,7 @@ const props = defineProps({
     modelValue: { type: Number, required: true },
     min: { type: Number, default: 0 },
     max: { type: Number, default: 99 },
-    loading: { type: Boolean, default: false },
-    size: { type: String, default: 'md' },
+    size: { type: String, default: 'md' }, // sm | md
 });
 const emit = defineEmits(['update:modelValue', 'change']);
 
@@ -16,32 +15,30 @@ function set(v) {
     emit('change', next);
 }
 
-const sz = props.size === 'sm' ? 'h-8 text-sm' : 'h-10 text-base';
+const h = props.size === 'sm' ? 'h-9' : 'h-10';
 </script>
 
 <template>
     <div
-        class="inline-flex items-center rounded-full bg-brand-500 text-white shadow-sm ring-1 ring-brand-600/20 transition"
-        :class="[sz, loading && 'opacity-60']"
+        class="inline-flex select-none items-stretch overflow-hidden rounded-full bg-herb-600 text-white shadow-sm"
+        :class="h"
     >
         <button
-            type="button"
-            class="grid aspect-square h-full place-items-center rounded-full text-lg leading-none transition active:scale-90 hover:bg-white/10"
-            :disabled="loading"
-            aria-label="کاهش"
+            type="button" aria-label="کاهش"
+            class="grid aspect-square place-items-center text-xl leading-none transition hover:bg-white/15 active:scale-90"
             @click="set(modelValue - 1)"
         >
-            −
+            <span class="-mt-0.5">−</span>
         </button>
-        <span class="min-w-8 text-center font-bold tabular-nums">{{ toFaDigits(modelValue) }}</span>
+        <span class="grid min-w-8 place-items-center px-1 text-sm font-extrabold tabular-nums">
+            {{ toFaDigits(modelValue) }}
+        </span>
         <button
-            type="button"
-            class="grid aspect-square h-full place-items-center rounded-full text-lg leading-none transition active:scale-90 hover:bg-white/10"
-            :disabled="loading || modelValue >= max"
-            aria-label="افزایش"
+            type="button" aria-label="افزایش" :disabled="modelValue >= max"
+            class="grid aspect-square place-items-center text-xl leading-none transition hover:bg-white/15 active:scale-90 disabled:opacity-40"
             @click="set(modelValue + 1)"
         >
-            +
+            <span class="-mt-0.5">+</span>
         </button>
     </div>
 </template>

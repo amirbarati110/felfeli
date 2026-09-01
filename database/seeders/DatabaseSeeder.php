@@ -38,10 +38,12 @@ class DatabaseSeeder extends Seeder
             'pickup_enabled' => true,
         ]);
 
-        // در محیط توسعه، کاتالوگ را از فایل نمونه پر کن
+        // در محیط توسعه، کاتالوگ را از فایل نمونه پر کن و با داده‌ی گروه فلفلی غنی کن
         if (app()->environment('local', 'testing')) {
             $source = app(IntegrationManager::class)->catalogSource('fixture');
             (new CatalogSynchronizer($source))->sync(deactivateMissing: false);
+
+            \Illuminate\Support\Facades\Artisan::call('catalog:enrich');
         }
     }
 }

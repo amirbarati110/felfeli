@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Shop\CartController;
 use App\Http\Controllers\Shop\CheckoutController;
+use App\Http\Controllers\Shop\LandingController;
 use App\Http\Controllers\Shop\MenuController;
 use App\Http\Controllers\Shop\OrderController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Route;
 | اصل PRD: کمترین کلیک از ورود تا ثبت سفارش، بدون ورود کاربر.
 */
 
-Route::get('/', [MenuController::class, 'index'])->name('menu.index');
+Route::get('/', LandingController::class)->name('home');
+Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
 
 Route::controller(CartController::class)->prefix('cart')->name('cart.')->group(function () {
     Route::get('/', 'show')->name('show');

@@ -27,7 +27,7 @@ function move(c, dir) {
     <AdminLayout>
         <div class="mb-4 flex items-center justify-between">
             <h1 class="text-xl font-extrabold">دسته‌بندی‌ها</h1>
-            <Link :href="route('admin.categories.create')" class="rounded-full bg-brand-500 px-4 py-2 text-sm font-bold text-white">افزودن دسته</Link>
+            <Link :href="route('admin.categories.create')" class="rounded-full bg-herb-500 px-4 py-2 text-sm font-bold text-white">افزودن دسته</Link>
         </div>
 
         <div class="overflow-hidden rounded-2xl bg-white ring-1 ring-black/5">
@@ -35,26 +35,26 @@ function move(c, dir) {
                 <tbody>
                     <tr v-for="(c, i) in categories" :key="c.id" class="border-b border-black/5 last:border-0">
                         <td class="w-16 p-3">
-                            <div class="flex flex-col text-brand-900/30">
-                                <button :disabled="i === 0" class="hover:text-brand-600 disabled:opacity-20" @click="move(c, -1)">▲</button>
-                                <button :disabled="i === categories.length - 1" class="hover:text-brand-600 disabled:opacity-20" @click="move(c, 1)">▼</button>
+                            <div class="flex flex-col text-herb-900/30">
+                                <button :disabled="i === 0" class="hover:text-herb-600 disabled:opacity-20" @click="move(c, -1)">▲</button>
+                                <button :disabled="i === categories.length - 1" class="hover:text-herb-600 disabled:opacity-20" @click="move(c, 1)">▼</button>
                             </div>
                         </td>
                         <td class="p-3 font-medium">{{ c.name }}</td>
-                        <td class="p-3 text-brand-900/50">{{ c.slug }}</td>
-                        <td class="p-3 text-brand-900/50">{{ faNumber(c.products_count) }} محصول</td>
+                        <td class="p-3 text-herb-900/50">{{ c.slug }}</td>
+                        <td class="p-3 text-herb-900/50">{{ faNumber(c.products_count) }} محصول</td>
                         <td class="p-3">
                             <button
                                 class="rounded-full px-2 py-0.5 text-xs"
-                                :class="c.is_active ? 'bg-brand-50 text-brand-700' : 'bg-black/5 text-brand-900/40'"
+                                :class="c.is_active ? 'bg-herb-50 text-herb-700' : 'bg-black/5 text-herb-900/40'"
                                 @click="toggle(c)"
                             >
                                 {{ c.is_active ? 'فعال' : 'غیرفعال' }}
                             </button>
                         </td>
                         <td class="p-3 text-left">
-                            <Link :href="route('admin.categories.edit', c.id)" class="text-xs font-medium text-brand-600">ویرایش</Link>
-                            <button class="ms-2 text-xs font-medium text-tomato-600" @click="destroy(c.id)">حذف</button>
+                            <Link :href="route('admin.categories.edit', c.id)" class="text-xs font-medium text-herb-600">ویرایش</Link>
+                            <button class="ms-2 text-xs font-medium text-anar-600" @click="destroy(c.id)">حذف</button>
                         </td>
                     </tr>
                 </tbody>

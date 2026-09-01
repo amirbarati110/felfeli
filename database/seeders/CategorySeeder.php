@@ -8,22 +8,23 @@ use Illuminate\Database\Seeder;
 class CategorySeeder extends Seeder
 {
     /**
-     * دسته‌بندی‌های پایه طبق PRD. slugها با CategoryClassifier هماهنگ‌اند.
+     * دسته‌بندی‌های فروشگاه — بر پایه‌ی ساختار واقعیِ گروه فلفلی و ترکیب اقلام باران.
+     * slugها با App\Support\CategoryClassifier و فایل enrichment هماهنگ‌اند.
      */
     public const CATEGORIES = [
-        ['slug' => 'sabzijat', 'name' => 'سبزیجات', 'icon' => 'leafy-green'],
+        ['slug' => 'sabzijat', 'name' => 'سبزیجات و فرنگیجات', 'icon' => 'leafy-green'],
+        ['slug' => 'sabzi-sorkh', 'name' => 'سبزیجات سرخ‌شده', 'icon' => 'flame'],
         ['slug' => 'sabzi-khoshk', 'name' => 'سبزی خشک', 'icon' => 'wheat'],
-        ['slug' => 'adviye-jat', 'name' => 'ادویه‌جات', 'icon' => 'flame'],
-        ['slug' => 'aab-limu-serke', 'name' => 'رب، آبلیمو، آبغوره و سرکه', 'icon' => 'citrus'],
-        ['slug' => 'roghan', 'name' => 'روغن‌ها', 'icon' => 'droplet'],
-        ['slug' => 'hobubat', 'name' => 'حبوبات', 'icon' => 'bean'],
-        ['slug' => 'khoshkbar', 'name' => 'خشکبار', 'icon' => 'nut'],
-        ['slug' => 'asal-shireh', 'name' => 'عسل و شیره', 'icon' => 'honey'],
-        ['slug' => 'moraba', 'name' => 'مربا و ترشیجات خانگی', 'icon' => 'jam'],
-        ['slug' => 'torshi-shoor', 'name' => 'ترشی و شور', 'icon' => 'jar'],
-        ['slug' => 'noshidani-damnush', 'name' => 'نوشیدنی و دمنوش', 'icon' => 'cup-soda'],
-        ['slug' => 'nabat-shirini', 'name' => 'نبات و شیرینی', 'icon' => 'candy'],
-        ['slug' => 'amade-protein', 'name' => 'محصولات آماده و پروتئینی', 'icon' => 'chef-hat'],
+        ['slug' => 'adviye', 'name' => 'ادویه و چاشنی', 'icon' => 'shaker'],
+        ['slug' => 'rob-torshi', 'name' => 'رب، ترشی و شور', 'icon' => 'jar'],
+        ['slug' => 'roghan', 'name' => 'روغن‌ها و ارده', 'icon' => 'droplet'],
+        ['slug' => 'hobubat', 'name' => 'حبوبات و غلات', 'icon' => 'bean'],
+        ['slug' => 'khoshkbar', 'name' => 'خشکبار و میوه خشک', 'icon' => 'nut'],
+        ['slug' => 'asal-moraba', 'name' => 'عسل، شیره و مربا', 'icon' => 'honey'],
+        ['slug' => 'araghijat', 'name' => 'عرقیجات، گلاب و شربت', 'icon' => 'flask'],
+        ['slug' => 'chai-damnush', 'name' => 'چای و دمنوش', 'icon' => 'cup-soda'],
+        ['slug' => 'amade', 'name' => 'محصولات آماده و پروتئینی', 'icon' => 'chef-hat'],
+        ['slug' => 'nabat', 'name' => 'نبات و شیرینی', 'icon' => 'candy'],
         ['slug' => 'sayer', 'name' => 'سایر محصولات', 'icon' => 'shopping-basket'],
     ];
 

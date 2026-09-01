@@ -27,7 +27,7 @@ watch(
         <div
             v-if="toast"
             class="fixed inset-x-0 bottom-24 z-50 mx-auto w-fit max-w-[92%] rounded-full px-4 py-2.5 text-sm font-medium text-white shadow-lg sm:bottom-6"
-            :class="toast.type === 'success' ? 'bg-brand-600' : 'bg-tomato-500'"
+            :class="toast.type === 'success' ? 'bg-herb-600' : 'bg-anar-500'"
         >
             {{ toast.msg }}
         </div>

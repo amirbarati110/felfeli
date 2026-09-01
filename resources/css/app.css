@@ -6,61 +6,110 @@
 @source '../**/*.vue';
 
 @theme {
-    --font-sans: 'AppSans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: 'Estedad Variable', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji',
+        'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
-    /* پالت برند فلفلی ساوه — طبق PRD
-       پس‌زمینه کرم، سبزِ تازه، زردِ لیمویی برای CTA، قرمز/نارنجی گوجه‌ای برای اکسنت */
-    --color-cream-50: #fdfbf5;
-    --color-cream-100: #f9f4e8;
-    --color-cream-200: #f1e8d2;
+    /* ── پالت «سبزی‌فروشیِ» فلفلی ساوه ───────────────────────────────
+       کاغذِ گرم، سبزِ سبزی تازه، طلاییِ زعفران برای CTA، اناری برای اکسنت */
+    --color-paper-50: #fdfbf4;
+    --color-paper-100: #fbf6ea;
+    --color-paper-200: #f4ecd9;
+    --color-kraft-100: #efe6d2;
+    --color-kraft-200: #e4d5b7;
 
-    --color-brand-50: #eef8ee;
-    --color-brand-100: #d6eed8;
-    --color-brand-200: #addcb2;
-    --color-brand-300: #7cc487;
-    --color-brand-400: #4ea862;
-    --color-brand-500: #2f8f4a;
-    --color-brand-600: #1f7a3d;
-    --color-brand-700: #196433;
-    --color-brand-800: #154f2b;
-    --color-brand-900: #113f24;
+    --color-herb-50: #ecf6ee;
+    --color-herb-100: #d3ecd8;
+    --color-herb-200: #a7d8b3;
+    --color-herb-300: #74be89;
+    --color-herb-400: #47a068;
+    --color-herb-500: #2e8450;
+    --color-herb-600: #206b40;
+    --color-herb-700: #1a5636;
+    --color-herb-800: #16442c;
+    --color-herb-900: #123322;
 
-    --color-lemon-300: #ffe066;
-    --color-lemon-400: #ffd43b;
-    --color-lemon-500: #fcc419;
-    --color-lemon-600: #f0b400;
+    --color-zaffron-300: #f4cd6b;
+    --color-zaffron-400: #ecb43e;
+    --color-zaffron-500: #e09c1c;
+    --color-zaffron-600: #c07f0d;
 
-    --color-tomato-400: #ff6b4a;
-    --color-tomato-500: #f2542d;
-    --color-tomato-600: #d63e1a;
+    --color-anar-400: #d9584a;
+    --color-anar-500: #c63f2f;
+    --color-anar-600: #a83122;
+
+    --radius-card: 0.75rem;
 }
 
 @layer base {
+    :root {
+        color-scheme: light;
+    }
+
     html {
-        background-color: var(--color-cream-100);
+        background-color: var(--color-paper-100);
         -webkit-tap-highlight-color: transparent;
+        scrollbar-gutter: stable;
     }
 
     body {
         font-family: var(--font-sans);
-        color: var(--color-brand-900);
+        color: var(--color-herb-900);
+        font-weight: 450;
         text-rendering: optimizeLegibility;
         -webkit-font-smoothing: antialiased;
     }
 
-    /* ارقام فارسی در همه‌جز فیلدهای ورودی */
-    :where(h1, h2, h3, h4, p, span, div, a, button, td, th, li) {
-        font-feature-settings: 'ss01';
+    h1, h2, h3, h4 {
+        font-weight: 800;
+        letter-spacing: -0.01em;
+    }
+
+    /* ارقام و اعشار فارسی، خطِ خواناتر */
+    :where(h1, h2, h3, h4, p, span, div, a, button, td, th, li, label) {
+        font-feature-settings: 'ss01', 'ss02';
+    }
+
+    ::selection {
+        background: var(--color-zaffron-300);
+        color: var(--color-herb-900);
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-herb-500);
+        outline-offset: 2px;
+    }
+}
+
+@layer components {
+    /* برچسبِ قیمت — امضای طرح: عددِ درشت با خط زیرِ زعفرانی مثل نرخ‌نامه */
+    .price-tag {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 0.25rem;
+        font-weight: 800;
+        line-height: 1;
+        color: var(--color-herb-800);
+    }
+    .price-tag > .unit {
+        font-size: 0.68em;
+        font-weight: 550;
+        color: color-mix(in oklab, var(--color-herb-900) 50%, transparent);
     }
 }
 
 @layer utilities {
-    .no-scrollbar::-webkit-scrollbar {
-        display: none;
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* بافتِ کاغذِ کاهی خیلی ملایم */
+    .bg-paper-grain {
+        background-color: var(--color-paper-100);
+        background-image:
+            radial-gradient(circle at 20% 30%, color-mix(in oklab, var(--color-herb-200) 22%, transparent) 0, transparent 45%),
+            radial-gradient(circle at 85% 12%, color-mix(in oklab, var(--color-zaffron-300) 25%, transparent) 0, transparent 40%);
     }
-    .no-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+
+    @media (prefers-reduced-motion: reduce) {
+        *, ::before, ::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
 }

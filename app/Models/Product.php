@@ -81,11 +81,22 @@ class Product extends Model
             return asset('images/product-placeholder.svg');
         }
 
-        if (Str::startsWith($this->image, ['http://', 'https://', '/'])) {
+        if (Str::startsWith($this->image, ['http://', 'https://'])) {
             return $this->image;
         }
 
+        // فایل‌های زیر public/ (مثل images/products/123.jpg) و مسیرهای مطلق
+        if (Str::startsWith($this->image, ['/', 'images/'])) {
+            return asset(ltrim($this->image, '/'));
+        }
+
+        // آپلودهای پنل روی دیسک public (products/xxxx.jpg)
         return Storage::disk('public')->url($this->image);
+    }
+
+    public function hasImage(): bool
+    {
+        return filled($this->image);
     }
 
     public function getRouteKeyName(): string

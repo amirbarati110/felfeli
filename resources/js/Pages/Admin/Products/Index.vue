@@ -35,12 +35,12 @@ function destroy(id) {
 
     <AdminLayout>
         <div class="mb-4 flex items-center justify-between">
-            <h1 class="text-xl font-extrabold">محصولات <span class="text-sm font-medium text-brand-900/40">({{ faNumber(products.total) }})</span></h1>
-            <Link :href="route('admin.products.create')" class="rounded-full bg-brand-500 px-4 py-2 text-sm font-bold text-white">افزودن محصول</Link>
+            <h1 class="text-xl font-extrabold">محصولات <span class="text-sm font-medium text-herb-900/40">({{ faNumber(products.total) }})</span></h1>
+            <Link :href="route('admin.products.create')" class="rounded-full bg-herb-500 px-4 py-2 text-sm font-bold text-white">افزودن محصول</Link>
         </div>
 
         <div class="mb-3 grid gap-2 sm:grid-cols-4">
-            <input v-model="f.q" placeholder="جستجو نام یا کد کالا…" class="h-10 rounded-xl border-0 bg-white px-3 text-sm ring-1 ring-black/5 focus:ring-2 focus:ring-brand-400" />
+            <input v-model="f.q" placeholder="جستجو نام یا کد کالا…" class="h-10 rounded-xl border-0 bg-white px-3 text-sm ring-1 ring-black/5 focus:ring-2 focus:ring-herb-400" />
             <select v-model="f.category" class="h-10 rounded-xl border-0 bg-white px-3 text-sm ring-1 ring-black/5">
                 <option value="">همه دسته‌ها</option>
                 <option v-for="c in categories" :key="c.id" :value="c.id">{{ c.name }}</option>
@@ -55,7 +55,7 @@ function destroy(id) {
 
         <div class="overflow-x-auto rounded-2xl bg-white ring-1 ring-black/5">
             <table class="w-full min-w-[680px] text-sm">
-                <thead class="border-b border-black/5 text-xs text-brand-900/50">
+                <thead class="border-b border-black/5 text-xs text-herb-900/50">
                     <tr>
                         <th class="p-3 text-right font-medium">کالا</th>
                         <th class="p-3 text-right font-medium">کد</th>
@@ -72,23 +72,23 @@ function destroy(id) {
                             <img :src="p.image_url" class="h-9 w-9 rounded-lg object-cover" @error="(e)=>e.target.src='/images/product-placeholder.svg'" />
                             <span class="font-medium">{{ p.name }}</span>
                         </td>
-                        <td class="p-3 text-brand-900/60">{{ p.sku }}</td>
-                        <td class="p-3 text-brand-900/60">{{ p.category ?? '—' }}</td>
+                        <td class="p-3 text-herb-900/60">{{ p.sku }}</td>
+                        <td class="p-3 text-herb-900/60">{{ p.category ?? '—' }}</td>
                         <td class="p-3">{{ tomanValue(p.price) }}</td>
                         <td class="p-3">
-                            <span :class="p.in_stock ? 'text-brand-600' : 'text-tomato-600'">
+                            <span :class="p.in_stock ? 'text-herb-600' : 'text-anar-600'">
                                 {{ p.in_stock ? 'موجود' : 'ناموجود' }}<template v-if="p.stock_qty != null"> · {{ faNumber(p.stock_qty) }}</template>
                             </span>
                         </td>
                         <td class="p-3">
-                            <span class="rounded-full px-2 py-0.5 text-xs" :class="p.is_active ? 'bg-brand-50 text-brand-700' : 'bg-black/5 text-brand-900/40'">
+                            <span class="rounded-full px-2 py-0.5 text-xs" :class="p.is_active ? 'bg-herb-50 text-herb-700' : 'bg-black/5 text-herb-900/40'">
                                 {{ p.is_active ? 'فعال' : 'غیرفعال' }}
                             </span>
-                            <span v-if="p.source" class="ms-1 text-[10px] text-brand-900/30">{{ p.source }}</span>
+                            <span v-if="p.source" class="ms-1 text-[10px] text-herb-900/30">{{ p.source }}</span>
                         </td>
                         <td class="whitespace-nowrap p-3 text-left">
-                            <Link :href="route('admin.products.edit', p.id)" class="text-xs font-medium text-brand-600">ویرایش</Link>
-                            <button class="ms-2 text-xs font-medium text-tomato-600" @click="destroy(p.id)">غیرفعال</button>
+                            <Link :href="route('admin.products.edit', p.id)" class="text-xs font-medium text-herb-600">ویرایش</Link>
+                            <button class="ms-2 text-xs font-medium text-anar-600" @click="destroy(p.id)">غیرفعال</button>
                         </td>
                     </tr>
                 </tbody>
@@ -99,7 +99,7 @@ function destroy(id) {
             <button
                 v-for="l in products.links" :key="l.label" :disabled="!l.url"
                 class="min-w-9 rounded-lg px-3 py-1.5 text-sm disabled:opacity-30"
-                :class="l.active ? 'bg-brand-500 text-white' : 'bg-white ring-1 ring-black/5'"
+                :class="l.active ? 'bg-herb-500 text-white' : 'bg-white ring-1 ring-black/5'"
                 @click="l.url && router.get(l.url, {}, { preserveState: true, preserveScroll: true })"
                 v-html="l.label"
             />

@@ -10,19 +10,16 @@ const props = defineProps({
 });
 
 const value = computed(() => tomanValue(props.rial));
-const compare = computed(() => (props.compareRial ? tomanValue(props.compareRial) : null));
+const compare = computed(() => (props.compareRial && props.compareRial > props.rial ? tomanValue(props.compareRial) : null));
 
-const sizeClass = {
-    sm: 'text-sm',
-    md: 'text-[15px]',
-    lg: 'text-xl',
-};
+const sizeClass = { sm: 'text-base', md: 'text-lg', lg: 'text-2xl' };
 </script>
 
 <template>
-    <span class="inline-flex items-baseline gap-1 font-bold text-brand-800" :class="sizeClass[size]">
-        <s v-if="compare" class="text-xs font-medium text-brand-900/40">{{ compare }}</s>
-        <span>{{ value }}</span>
-        <span v-if="unit" class="text-xs font-medium text-brand-900/55">تومان</span>
+    <span class="inline-flex flex-col items-start leading-none">
+        <s v-if="compare" class="mb-0.5 text-[11px] font-medium text-anar-500/70">{{ compare }}</s>
+        <span class="price-tag" :class="sizeClass[size]">
+            {{ value }}<span v-if="unit" class="unit">تومان</span>
+        </span>
     </span>
 </template>

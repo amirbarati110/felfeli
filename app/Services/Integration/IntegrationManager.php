@@ -5,6 +5,7 @@ namespace App\Services\Integration;
 use App\Services\Integration\Baran\BaranApiOrderChannel;
 use App\Services\Integration\Baran\BaranCatalogSource;
 use App\Services\Integration\Baran\BaranMenuClient;
+use App\Services\Integration\Baran\BaranMenuFactorOrderChannel;
 use App\Services\Integration\Baran\SimulateOrderChannel;
 use App\Services\Integration\Contracts\CatalogSource;
 use App\Services\Integration\Contracts\OrderChannel;
@@ -33,6 +34,7 @@ class IntegrationManager
 
         return match ($driver) {
             'simulate' => new SimulateOrderChannel(),
+            'baran_menu' => BaranMenuFactorOrderChannel::fromConfig(),
             'baran_api' => BaranApiOrderChannel::fromConfig(),
             default => throw new InvalidArgumentException("درایور سفارش نامعتبر: {$driver}"),
         };

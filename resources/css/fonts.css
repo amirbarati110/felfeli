@@ -1,49 +1,11 @@
 /*
- | فونت رابط کاربری فلفلی ساوه
+ | فونت رابط کاربری فلفلی ساوه — «استعداد» (Estedad).
  |
- | فونت هدف طرح، «دانا» (fontiran.com) است که تجاری و غیررایگان است؛ تا زمان
- | تهیه‌ی وب‌فونت رسمی، «وزیرمتن» (متن‌باز، SIL OFL) به‌عنوان جایگزین ساختاری
- | نزدیک استفاده می‌شود. برای جایگزینی با دانا کافی است فایل‌های woff2 دانا در
- | resources/fonts/dana قرار گیرد و بلوک‌های @font-face زیر به آن اشاره کند؛
- | متغیر --font-app و بقیه‌ی استایل‌ها تغییری لازم ندارند.
+ | استعداد اثرِ مسلم ابراهیمی است؛ هم‌خانواده و هم‌حسِ فونت «دانا» ولی متن‌باز
+ | (SIL OFL) و رایگان. فونتِ variable و self-host از پکیج @fontsource.
+ | برای جایگزینی با «دانا» (در صورت خرید وب‌فونت‌کیت): فایل‌های woff2 دانا را در
+ | resources/fonts/dana بگذارید و این import را با @font-faceهای دانا عوض کنید؛
+ | متغیر --font-app دست‌نخورده می‌ماند.
  */
 
-@font-face {
-    font-family: 'AppSans';
-    src: url('../fonts/vazirmatn/Vazirmatn-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AppSans';
-    src: url('../fonts/vazirmatn/Vazirmatn-Medium.woff2') format('woff2');
-    font-weight: 500;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AppSans';
-    src: url('../fonts/vazirmatn/Vazirmatn-SemiBold.woff2') format('woff2');
-    font-weight: 600;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AppSans';
-    src: url('../fonts/vazirmatn/Vazirmatn-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'AppSans';
-    src: url('../fonts/vazirmatn/Vazirmatn-ExtraBold.woff2') format('woff2');
-    font-weight: 800;
-    font-style: normal;
-    font-display: swap;
-}
+@import '@fontsource-variable/estedad/index.css';
