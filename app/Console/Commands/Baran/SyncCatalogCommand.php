@@ -12,7 +12,7 @@ class SyncCatalogCommand extends Command
         {--driver= : baran_menu یا fixture}
         {--keep-missing : کالاهای غایب در منبع را غیرفعال نکن}';
 
-    protected $description = 'همگام‌سازی کاتالوگ محصولات از منوی باران (قیمت/موجودی/نام/عکس)';
+    protected $description = 'همگام‌سازی کاتالوگ محصولات از منوی باران (قیمت/موجودی/نام؛ بدون عکس)';
 
     public function handle(IntegrationManager $manager): int
     {

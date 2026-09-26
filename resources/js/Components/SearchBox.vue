@@ -41,17 +41,20 @@ function submit(value) {
         >
             <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
         </svg>
+        <label for="shop-search" class="sr-only">جستجو در محصولات</label>
         <input
+            id="shop-search"
             v-model="term"
             type="search"
             enterkeyhint="search"
             placeholder="چی لازم داری؟"
-            class="h-11 w-full rounded-full border border-kraft-200 bg-white ps-4 pe-11 text-sm text-herb-900 shadow-sm outline-none transition placeholder:text-herb-900/40 focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50"
+            class="h-12 w-full rounded-full border border-kraft-200 bg-white pe-11 text-base text-herb-900 shadow-sm outline-none transition placeholder:text-herb-900/40 focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:h-11 sm:text-sm"
+            :class="term ? 'ps-11' : 'ps-4'"
         />
         <button
             v-if="term"
             type="button"
-            class="absolute start-3 top-1/2 -translate-y-1/2 rounded-full p-1 text-herb-900/40 transition hover:text-herb-900/70"
+            class="absolute start-1.5 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full text-herb-900/60 transition hover:bg-herb-50 hover:text-herb-900"
             aria-label="پاک کردن"
             @click="term = ''"
         >

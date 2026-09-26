@@ -37,15 +37,15 @@ const inCart = computed(() => qty.value > 0);
         </div>
 
         <div class="flex flex-1 flex-col gap-2.5 p-3">
-            <h3 class="line-clamp-2 min-h-[2.6em] text-[13px] font-semibold leading-snug text-herb-900">
+            <h3 class="line-clamp-2 min-h-12 text-sm font-semibold leading-6 text-herb-900">
                 {{ product.name }}
             </h3>
 
-            <div class="mt-auto flex items-end justify-between gap-2">
-                <div class="min-w-0">
-                    <Price :rial="product.price" :compare-rial="product.compare_price" size="sm" />
-                </div>
+            <div class="mt-auto min-w-0">
+                <Price :rial="product.price" :compare-rial="product.compare_price" size="sm" />
+            </div>
 
+            <div class="flex min-h-11 items-center">
                 <QtyStepper
                     v-if="inCart"
                     :model-value="qty"
@@ -56,11 +56,12 @@ const inCart = computed(() => qty.value > 0);
                     v-else
                     type="button"
                     :disabled="!product.in_stock"
-                    class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-zaffron-400 text-xl leading-none text-herb-900 shadow-sm transition hover:bg-zaffron-500 active:scale-90 disabled:cursor-not-allowed disabled:bg-kraft-200 disabled:text-herb-900/30"
-                    aria-label="افزودن به سبد"
+                    class="flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-zaffron-400 px-2 text-sm font-extrabold text-herb-900 shadow-sm transition hover:bg-zaffron-500 active:bg-zaffron-500 disabled:cursor-not-allowed disabled:bg-kraft-200 disabled:text-herb-900/50"
+                    :aria-label="`افزودن ${product.name} به سبد`"
                     @click="cart.add(product.sku)"
                 >
-                    <span class="-mt-0.5">+</span>
+                    <span aria-hidden="true" class="text-xl leading-none">+</span>
+                    {{ product.in_stock ? 'افزودن' : 'ناموجود' }}
                 </button>
             </div>
         </div>

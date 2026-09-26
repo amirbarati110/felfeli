@@ -90,7 +90,11 @@ class Product extends Model
             return asset(ltrim($this->image, '/'));
         }
 
-        // آپلودهای پنل روی دیسک public (products/xxxx.jpg)
+        // عکس دستی بدون وابستگی به symlink روی هاست اشتراکی نمایش داده می‌شود.
+        if (Str::startsWith($this->image, 'products/')) {
+            return route('products.image', ['filename' => basename($this->image)]);
+        }
+
         return Storage::disk('public')->url($this->image);
     }
 

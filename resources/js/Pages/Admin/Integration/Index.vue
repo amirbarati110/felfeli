@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import { faNumber, toFaDigits } from '@/lib/format';
@@ -9,9 +10,14 @@ defineProps({
     logs: { type: Array, default: () => [] },
 });
 
-const syncing = { value: false };
+const syncing = ref(false);
 function syncCatalog() {
-    router.post(route('admin.integration.sync'), {}, { preserveScroll: true });
+    if (syncing.value) return;
+    router.post(route('admin.integration.sync'), {}, {
+        preserveScroll: true,
+        onStart: () => (syncing.value = true),
+        onFinish: () => (syncing.value = false),
+    });
 }
 function retryAll() {
     router.post(route('admin.integration.retryAll'), {}, { preserveScroll: true });
@@ -19,10 +25,11 @@ function retryAll() {
 </script>
 
 <template>
-    <Head title="اتصال باران" />
+    <Head title="همگام‌سازی کالا و عکس" />
 
     <AdminLayout>
-        <h1 class="mb-4 text-xl font-extrabold">اتصال نرم‌افزار حسابداری باران</h1>
+        <h1 class="mb-2 text-xl font-extrabold">همگام‌سازی کالا و عکس</h1>
+        <p class="mb-4 text-sm text-herb-700">نام، قیمت و موجودی از باران؛ عکس‌ها از فلفلی. عکس‌هایی که دستی آپلود کرده‌اید محفوظ می‌مانند.</p>
 
         <div class="grid gap-4 lg:grid-cols-3">
             <div class="rounded-2xl bg-white p-4 ring-1 ring-black/5 lg:col-span-1">
@@ -39,8 +46,8 @@ function retryAll() {
                     </div>
                 </dl>
                 <div class="mt-4 space-y-2">
-                    <button class="w-full rounded-full bg-herb-500 py-2.5 text-sm font-bold text-white" @click="syncCatalog">
-                        همگام‌سازی کاتالوگ از باران
+                    <button type="button" :disabled="syncing" class="min-h-11 w-full rounded-xl bg-herb-700 px-4 py-2.5 text-sm font-bold text-white disabled:opacity-60" @click="syncCatalog">
+                        {{ syncing ? 'در حال به‌روزرسانی…' : 'به‌روزرسانی قیمت‌ها و عکس‌ها' }}
                     </button>
                     <button class="w-full rounded-full bg-white py-2.5 text-sm font-bold text-herb-700 ring-1 ring-herb-200" @click="retryAll">
                         ارسال مجدد همه‌ی سفارش‌های ناموفق

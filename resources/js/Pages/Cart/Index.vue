@@ -45,23 +45,25 @@ const isEmpty = computed(() => props.items.length === 0);
                 <ul class="space-y-2">
                     <li
                         v-for="item in items" :key="item.sku"
-                        class="flex items-center gap-3 rounded-card border border-kraft-200/70 bg-white p-3"
+                        class="grid grid-cols-[4.5rem_minmax(0,1fr)] gap-3 rounded-card border border-kraft-200/70 bg-white p-3 sm:grid-cols-[4.5rem_minmax(0,1fr)_auto] sm:items-center"
                     >
                         <img
                             :src="item.image_url" :alt="item.name"
-                            class="h-16 w-16 shrink-0 rounded-lg object-cover"
+                            class="h-[4.5rem] w-[4.5rem] rounded-lg object-cover"
                             @error="(e) => (e.target.src = '/images/product-placeholder.svg')"
                         />
                         <div class="min-w-0 flex-1">
-                            <p class="line-clamp-1 text-sm font-semibold text-herb-900">{{ item.name }}</p>
-                            <p class="mt-0.5 text-xs text-herb-900/50">{{ tomanValue(item.unit_price) }} تومان</p>
-                            <div class="mt-2 flex items-center gap-3">
-                                <QtyStepper :model-value="item.quantity" size="sm" @change="(q) => cart.setQty(item.sku, q)" />
-                                <button class="text-xs font-medium text-anar-600" @click="cart.remove(item.sku)">حذف</button>
-                            </div>
+                            <p class="text-sm font-semibold leading-6 text-herb-900">{{ item.name }}</p>
+                            <p class="mt-0.5 text-xs text-herb-700">قیمت هر عدد: {{ tomanValue(item.unit_price) }} تومان</p>
                         </div>
-                        <div class="price-tag shrink-0 text-base">
-                            {{ tomanValue(item.line_total) }}<span class="unit">تومان</span>
+                        <div class="col-span-2 flex flex-wrap items-center justify-between gap-2 border-t border-kraft-200/70 pt-3 sm:col-span-1 sm:flex-col sm:items-end sm:border-0 sm:pt-0">
+                            <div class="flex items-center gap-2">
+                                <QtyStepper :model-value="item.quantity" size="sm" @change="(q) => cart.setQty(item.sku, q)" />
+                                <button type="button" class="min-h-11 min-w-11 rounded-lg px-2 text-sm font-bold text-anar-600" @click="cart.remove(item.sku)">حذف</button>
+                            </div>
+                            <div class="price-tag shrink-0 text-base">
+                                {{ tomanValue(item.line_total) }}<span class="unit">تومان</span>
+                            </div>
                         </div>
                     </li>
                 </ul>

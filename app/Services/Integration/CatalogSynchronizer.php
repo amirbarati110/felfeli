@@ -15,7 +15,7 @@ use Throwable;
 /**
  * همگام‌سازی کاتالوگ: اقلام منبع را بر مبنای SKU در جدول products
  * upsert می‌کند. دسته‌بندی سایت را تغییر نمی‌دهد (طبق PRD دسته‌ها از پنل
- * کنترل می‌شوند)، فقط قیمت/موجودی/نام/عکس را به‌روز می‌کند.
+ * کنترل می‌شوند)، فقط قیمت/موجودی/نام را به‌روز می‌کند. عکس از باران نمی‌آید.
  *
  * فیلدهای «مدیریت‌شده در پنل» (category_id، is_active، sort_order، توضیحات
  * دستی) در به‌روزرسانی دست‌نخورده می‌مانند.
@@ -104,10 +104,6 @@ class CatalogSynchronizer
             'source' => 'baran',
             'source_updated_at' => $now,
         ];
-
-        if (filled($item->imageUrl)) {
-            $payload['image'] = $item->imageUrl;
-        }
 
         if (! $product) {
             $slug = CategoryClassifier::classify($item->name);

@@ -20,13 +20,15 @@ class LoginController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'email' => ['required', 'email'],
+            'login' => ['required', 'string'],
             'password' => ['required', 'string'],
         ]);
 
-        if (! Auth::attempt($data, $request->boolean('remember'))) {
+        $field = str_contains($data['login'], '@') ? 'email' : 'username';
+
+        if (! Auth::attempt([$field => $data['login'], 'password' => $data['password']], $request->boolean('remember'))) {
             throw ValidationException::withMessages([
-                'email' => 'ایمیل یا گذرواژه نادرست است.',
+                'login' => 'نام کاربری یا گذرواژه نادرست است.',
             ]);
         }
 

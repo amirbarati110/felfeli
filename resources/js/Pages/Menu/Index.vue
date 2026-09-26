@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { Head, router } from '@inertiajs/vue3';
 import ShopLayout from '@/Layouts/ShopLayout.vue';
 import ProductCard from '@/Components/ProductCard.vue';
@@ -20,8 +20,10 @@ const title = computed(() =>
           ? props.activeCategory.name
           : 'همه محصولات',
 );
+const categoryOpen = ref(false);
 
 function pick(slug) {
+    categoryOpen.value = false;
     const data = {};
     if (slug) data.category = slug;
     if (props.filters.q) data.q = props.filters.q;
@@ -66,24 +68,23 @@ function goPage(url) {
             </aside>
 
             <div class="min-w-0 flex-1">
-                <!-- چیپس دسته‌ها (موبایل/تبلت) -->
-                <div class="no-scrollbar -mx-4 mb-4 flex gap-2 overflow-x-auto px-4 lg:hidden">
+                <!-- انتخاب دسته در موبایل، بدون اسکرول افقیِ بلند -->
+                <section class="mb-5 lg:hidden" aria-label="دسته‌بندی محصولات">
                     <button
-                        class="shrink-0 rounded-full border px-4 py-1.5 text-sm font-semibold transition"
-                        :class="!filters.category ? 'border-herb-600 bg-herb-600 text-white' : 'border-kraft-200 bg-white text-herb-900/70'"
-                        @click="pick(null)"
+                        type="button"
+                        class="flex min-h-12 w-full items-center justify-between gap-3 rounded-xl border border-kraft-200 bg-paper-50 px-4 text-right text-sm font-bold text-herb-900 transition active:bg-paper-100"
+                        :aria-expanded="categoryOpen"
+                        aria-controls="mobile-categories"
+                        @click="categoryOpen = !categoryOpen"
                     >
-                        همه
+                        <span class="min-w-0 truncate">دسته‌بندی: {{ activeCategory?.name || 'همه محصولات' }}</span>
+                        <svg class="h-5 w-5 shrink-0 transition-transform" :class="categoryOpen && 'rotate-180'" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6" /></svg>
                     </button>
-                    <button
-                        v-for="c in categories" :key="c.slug"
-                        class="shrink-0 rounded-full border px-4 py-1.5 text-sm font-medium transition"
-                        :class="filters.category === c.slug ? 'border-herb-600 bg-herb-600 text-white' : 'border-kraft-200 bg-white text-herb-900/70'"
-                        @click="pick(c.slug)"
-                    >
-                        {{ c.name }}
-                    </button>
-                </div>
+                    <div v-if="categoryOpen" id="mobile-categories" class="mt-2 grid grid-cols-2 gap-2 rounded-xl border border-kraft-200 bg-white p-2">
+                        <button type="button" class="min-h-11 rounded-lg px-3 text-right text-sm font-semibold" :class="!filters.category ? 'bg-herb-700 text-white' : 'bg-paper-50 text-herb-800'" :aria-pressed="!filters.category" @click="pick(null)">همه محصولات</button>
+                        <button v-for="c in categories" :key="c.slug" type="button" class="min-h-11 rounded-lg px-3 text-right text-sm font-semibold" :class="filters.category === c.slug ? 'bg-herb-700 text-white' : 'bg-paper-50 text-herb-800'" :aria-pressed="filters.category === c.slug" @click="pick(c.slug)">{{ c.name }}</button>
+                    </div>
+                </section>
 
                 <div class="mb-3 flex items-baseline justify-between">
                     <h1 class="text-lg font-extrabold text-herb-900">{{ title }}</h1>
@@ -109,11 +110,16 @@ function goPage(url) {
                 </div>
 
                 <!-- گرید محصولات -->
-                <div v-else class="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+                <div v-else class="grid grid-cols-1 gap-3 min-[360px]:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
                     <ProductCard v-for="p in products.data" :key="p.sku" :product="p" />
                 </div>
 
-                <div v-if="products.last_page > 1" class="mt-6 flex flex-wrap justify-center gap-1.5">
+                <div v-if="products.last_page > 1" class="mt-6 flex items-center justify-between gap-2 sm:hidden" aria-label="صفحه‌های محصولات">
+                    <button type="button" :disabled="!products.prev_page_url" class="min-h-11 rounded-xl border border-kraft-200 bg-white px-4 text-sm font-bold text-herb-800 disabled:opacity-40" @click="goPage(products.prev_page_url)">قبلی</button>
+                    <span class="text-sm font-semibold text-herb-800">{{ faNumber(products.current_page) }} از {{ faNumber(products.last_page) }}</span>
+                    <button type="button" :disabled="!products.next_page_url" class="min-h-11 rounded-xl border border-kraft-200 bg-white px-4 text-sm font-bold text-herb-800 disabled:opacity-40" @click="goPage(products.next_page_url)">بعدی</button>
+                </div>
+                <div v-if="products.last_page > 1" class="mt-6 hidden flex-wrap justify-center gap-1.5 sm:flex">
                     <button
                         v-for="link in products.links" :key="link.label"
                         :disabled="!link.url"

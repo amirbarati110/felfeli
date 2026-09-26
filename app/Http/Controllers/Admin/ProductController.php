@@ -77,6 +77,13 @@ class ProductController extends Controller
 
     public function update(Request $request, Product $product): RedirectResponse
     {
+        if ($product->source === 'baran') {
+            $data = $request->validate(['image' => ['required', 'image', 'max:4096']]);
+            $product->update(['image' => $data['image']->store('products', 'public')]);
+
+            return redirect()->route('admin.products.index')->with('success', 'تصویر کالا به‌روزرسانی شد.');
+        }
+
         $product->update($this->validated($request, $product));
 
         return redirect()->route('admin.products.index')->with('success', 'محصول به‌روزرسانی شد.');

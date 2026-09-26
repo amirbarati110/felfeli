@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
 /**
- * همگام‌سازی دوره‌ای کاتالوگ از باران (قیمت/موجودی/نام/عکس).
+ * همگام‌سازی دوره‌ای کاتالوگ از باران (قیمت/موجودی/نام؛ بدون عکس).
  * توسط زمان‌بند اجرا می‌شود؛ بازه پس از تأیید باران (real-time یا دوره‌ای) نهایی می‌شود.
  */
 class SyncBaranCatalogJob implements ShouldQueue, ShouldBeUnique

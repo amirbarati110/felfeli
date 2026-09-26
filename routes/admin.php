@@ -14,7 +14,13 @@ use Illuminate\Support\Facades\Route;
 | پنل مدیریت فروشگاه فلفلی ساوه
 */
 
-Route::prefix('admin')->name('admin.')->group(function () {
+$adminDomain = config('app.admin_domain');
+
+Route::group([
+    'domain' => $adminDomain,
+    'prefix' => $adminDomain ? '' : 'admin',
+    'as' => 'admin.',
+], function () {
     Route::middleware('guest')->group(function () {
         Route::get('login', [LoginController::class, 'show'])->name('login');
         Route::post('login', [LoginController::class, 'store'])->name('login.store');
@@ -25,7 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/', DashboardController::class)->name('dashboard');
 
-        Route::resource('products', ProductController::class)->except('show');
+        Route::resource('products', ProductController::class)->except('show')->scoped(['product' => 'id']);
         Route::post('products/reorder', [ProductController::class, 'reorder'])->name('products.reorder');
 
         Route::resource('categories', CategoryController::class)->except('show');

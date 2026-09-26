@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Jobs\SyncBaranCatalogJob;
 use App\Models\IntegrationLog;
 use App\Models\Order;
+use App\Services\Integration\FelfeliPhotoSynchronizer;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Artisan;
 use Inertia\Inertia;
 use Inertia\Response;
+use Throwable;
 
 class IntegrationController extends Controller
 {
@@ -52,11 +54,37 @@ class IntegrationController extends Controller
         ]);
     }
 
-    public function syncCatalog(): RedirectResponse
+    public function syncCatalog(FelfeliPhotoSynchronizer $photos): RedirectResponse
     {
-        SyncBaranCatalogJob::dispatchSync();
+        try {
+            SyncBaranCatalogJob::dispatchSync();
+        } catch (Throwable $e) {
+            IntegrationLog::create([
+                'channel' => 'baran',
+                'direction' => 'in',
+                'event' => 'catalog.sync',
+                'status' => 'failed',
+                'message' => 'دریافت کاتالوگ باران ناموفق بود.',
+            ]);
 
-        return back()->with('success', 'همگام‌سازی کاتالوگ از باران انجام شد.');
+            return back()->with('error', 'باران در دسترس نیست و کالاها به‌روز نشدند. بعداً دوباره تلاش کنید.');
+        }
+
+        try {
+            $photoSummary = $photos->sync();
+        } catch (Throwable $e) {
+            IntegrationLog::create([
+                'channel' => 'felfeli',
+                'direction' => 'in',
+                'event' => 'catalog.photos.sync',
+                'status' => 'failed',
+                'message' => 'دریافت عکس‌های فلفلی ناموفق بود.',
+            ]);
+
+            return back()->with('error', 'کالاها و قیمت‌ها از باران به‌روز شدند، اما عکس‌های فلفلی به‌روز نشدند. دوباره تلاش کنید.');
+        }
+
+        return back()->with('success', "کالاها و قیمت‌ها از باران به‌روز شدند؛ {$photoSummary['updated']} عکس از فلفلی تازه شد.");
     }
 
     public function retryAll(): RedirectResponse

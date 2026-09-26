@@ -13,10 +13,22 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::updateOrCreate(
-            ['email' => 'admin@felfeli.test'],
-            ['name' => 'مدیر فروشگاه', 'password' => Hash::make('password')],
-        );
+        // Never publish the development login on a production database.
+        if (app()->environment('local', 'testing')) {
+            User::updateOrCreate(
+                ['email' => 'admin@felfeli.test'],
+                ['name' => 'مدیر فروشگاه', 'username' => 'admin', 'password' => Hash::make('password')],
+            );
+        } elseif (config('app.bootstrap_admin_username') && config('app.bootstrap_admin_password')) {
+            User::firstOrCreate(
+                ['username' => config('app.bootstrap_admin_username')],
+                [
+                    'name' => 'مدیر فروشگاه',
+                    'email' => 'admin@felfelisaveh.ir',
+                    'password' => Hash::make(config('app.bootstrap_admin_password')),
+                ],
+            );
+        }
 
         $this->call(CategorySeeder::class);
 

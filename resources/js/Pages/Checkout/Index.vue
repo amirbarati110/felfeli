@@ -21,7 +21,7 @@ const form = useForm({
 const deliveryFee = computed(() => (form.delivery_method === 'delivery' ? props.checkout.delivery_fee : 0));
 const total = computed(() => props.subtotal + deliveryFee.value);
 
-const field = 'h-12 w-full rounded-xl border border-kraft-200 bg-paper-50 px-4 text-sm outline-none transition focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50';
+const field = 'h-12 w-full rounded-xl border border-kraft-200 bg-paper-50 px-4 text-base outline-none transition focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:text-sm';
 
 function submit() {
     form.transform((d) => ({ ...d, address: d.delivery_method === 'delivery' ? d.address : '' }))
@@ -47,32 +47,34 @@ function submit() {
 
             <form class="space-y-4" @submit.prevent="submit">
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">
-                    <label class="mb-1.5 block text-sm font-semibold text-herb-900">نام و نام خانوادگی <span class="text-anar-500">*</span></label>
-                    <input v-model="form.customer_name" type="text" placeholder="مثال: محمد احمدی" :class="field" />
+                    <label for="customer-name" class="mb-1.5 block text-sm font-semibold text-herb-900">نام و نام خانوادگی <span class="text-anar-500">*</span></label>
+                    <input id="customer-name" v-model="form.customer_name" type="text" autocomplete="name" placeholder="مثال: محمد احمدی" :class="field" />
                     <p v-if="form.errors.customer_name" class="mt-1 text-xs text-anar-600">{{ form.errors.customer_name }}</p>
                 </div>
 
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">
-                    <label class="mb-1.5 block text-sm font-semibold text-herb-900">شماره موبایل <span class="text-anar-500">*</span></label>
-                    <input v-model="form.customer_mobile" type="tel" inputmode="numeric" dir="ltr" placeholder="۰۹۱۲ ۱۲۳ ۴۵۶۷" :class="[field, 'text-right']" />
+                    <label for="customer-mobile" class="mb-1.5 block text-sm font-semibold text-herb-900">شماره موبایل <span class="text-anar-500">*</span></label>
+                    <input id="customer-mobile" v-model="form.customer_mobile" type="tel" inputmode="numeric" autocomplete="tel" dir="ltr" placeholder="۰۹۱۲ ۱۲۳ ۴۵۶۷" :class="[field, 'text-right']" />
                     <p v-if="form.errors.customer_mobile" class="mt-1 text-xs text-anar-600">{{ form.errors.customer_mobile }}</p>
                 </div>
 
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">
                     <label class="mb-2 block text-sm font-semibold text-herb-900">روش دریافت سفارش</label>
-                    <div class="grid grid-cols-2 gap-2">
+                    <div class="grid grid-cols-2 gap-2" role="group" aria-label="روش دریافت سفارش">
                         <button
                             v-if="checkout.delivery_enabled" type="button"
-                            class="rounded-xl border-2 px-3 py-3 text-sm font-semibold transition"
+                            class="min-h-12 rounded-xl border-2 px-3 py-3 text-sm font-semibold transition"
                             :class="form.delivery_method === 'delivery' ? 'border-herb-500 bg-herb-50 text-herb-700' : 'border-kraft-200 text-herb-900/55'"
+                            :aria-pressed="form.delivery_method === 'delivery'"
                             @click="form.delivery_method = 'delivery'"
                         >
                             ارسال در ساوه
                         </button>
                         <button
                             v-if="checkout.pickup_enabled" type="button"
-                            class="rounded-xl border-2 px-3 py-3 text-sm font-semibold transition"
+                            class="min-h-12 rounded-xl border-2 px-3 py-3 text-sm font-semibold transition"
                             :class="form.delivery_method === 'pickup' ? 'border-herb-500 bg-herb-50 text-herb-700' : 'border-kraft-200 text-herb-900/55'"
+                            :aria-pressed="form.delivery_method === 'pickup'"
                             @click="form.delivery_method = 'pickup'"
                         >
                             دریافت حضوری
@@ -81,15 +83,15 @@ function submit() {
                     <p v-if="form.errors.delivery_method" class="mt-1 text-xs text-anar-600">{{ form.errors.delivery_method }}</p>
 
                     <div v-if="form.delivery_method === 'delivery'" class="mt-3">
-                        <label class="mb-1.5 block text-sm font-semibold text-herb-900">آدرس <span class="text-anar-500">*</span></label>
-                        <textarea v-model="form.address" rows="3" placeholder="نشانی دقیق برای ارسال در ساوه" class="w-full rounded-xl border border-kraft-200 bg-paper-50 p-4 text-sm outline-none focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50" />
+                        <label for="delivery-address" class="mb-1.5 block text-sm font-semibold text-herb-900">آدرس <span class="text-anar-500">*</span></label>
+                        <textarea id="delivery-address" v-model="form.address" rows="3" placeholder="نشانی دقیق برای ارسال در ساوه" class="w-full rounded-xl border border-kraft-200 bg-paper-50 p-4 text-base outline-none focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:text-sm" />
                         <p v-if="form.errors.address" class="mt-1 text-xs text-anar-600">{{ form.errors.address }}</p>
                     </div>
                 </div>
 
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">
-                    <label class="mb-1.5 block text-sm font-semibold text-herb-900">توضیحات سفارش <span class="font-normal text-herb-900/40">(اختیاری)</span></label>
-                    <textarea v-model="form.note" rows="2" class="w-full rounded-xl border border-kraft-200 bg-paper-50 p-4 text-sm outline-none focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50" />
+                    <label for="order-note" class="mb-1.5 block text-sm font-semibold text-herb-900">توضیحات سفارش <span class="font-normal text-herb-900/40">(اختیاری)</span></label>
+                    <textarea id="order-note" v-model="form.note" rows="2" class="w-full rounded-xl border border-kraft-200 bg-paper-50 p-4 text-base outline-none focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:text-sm" />
                 </div>
 
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">

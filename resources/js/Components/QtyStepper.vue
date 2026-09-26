@@ -15,7 +15,7 @@ function set(v) {
     emit('change', next);
 }
 
-const h = props.size === 'sm' ? 'h-9' : 'h-10';
+const h = props.size === 'sm' ? 'h-11' : 'h-12';
 </script>
 
 <template>
