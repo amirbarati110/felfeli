@@ -23,6 +23,8 @@ jobs:
       - name: Install dependencies and verify application
         run: |
           composer install --no-interaction --prefer-dist
+          cp .env.example .env
+          php artisan key:generate --no-ansi
           php artisan test
           npm ci
           npm run build
