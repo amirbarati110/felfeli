@@ -25,9 +25,9 @@ jobs:
           composer install --no-interaction --prefer-dist
           cp .env.example .env
           php artisan key:generate --no-ansi
-          php artisan test
           npm ci
           npm run build
+          php artisan test
           composer install --no-dev --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Build private app and two public document roots
