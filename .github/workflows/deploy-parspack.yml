@@ -13,6 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Use PHP 8.4 required by locked dependencies
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, intl, pdo_sqlite, zip
+          coverage: none
+
       - name: Install dependencies and verify application
         run: |
           composer install --no-interaction --prefer-dist
