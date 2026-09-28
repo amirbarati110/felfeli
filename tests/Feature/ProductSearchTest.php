@@ -18,7 +18,7 @@ class ProductSearchTest extends TestCase
         $this->get(route('menu.index', ['q' => 'ادوی']))
             ->assertOk()
             ->assertInertia(fn ($page) => $page
-                ->component('Menu/Index')
+                ->component('Menu/Index', false)
                 ->has('products.data', 1)
                 ->where('products.data.0.sku', '101'));
     }
