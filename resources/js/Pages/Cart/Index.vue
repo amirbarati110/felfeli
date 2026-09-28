@@ -35,7 +35,7 @@ const isEmpty = computed(() => props.items.length === 0);
                 <svg class="mx-auto h-16 w-16 text-herb-200" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M10 14h28l-3 20a4 4 0 0 1-4 3H17a4 4 0 0 1-4-3z" /><path d="M18 20v10M30 20v10M10 14 8 7H3" />
                 </svg>
-                <p class="mt-4 text-sm font-medium text-herb-900/60">سبد خرید خالی است.</p>
+                <p class="mt-4 text-sm font-medium text-herb-900/65">سبد خرید خالی است.</p>
                 <Link :href="route('menu.index')" class="mt-4 inline-block rounded-full bg-herb-600 px-5 py-2.5 text-sm font-bold text-white">
                     رفتن به منو
                 </Link>
@@ -70,7 +70,7 @@ const isEmpty = computed(() => props.items.length === 0);
 
                 <div class="mt-4 rounded-card border border-kraft-200/70 bg-white p-4">
                     <div class="flex items-center justify-between text-sm">
-                        <span class="text-herb-900/60">جمع سبد</span>
+                        <span class="text-herb-900/65">جمع سبد</span>
                         <span class="price-tag text-lg">{{ tomanValue(subtotal) }}<span class="unit">تومان</span></span>
                     </div>
                     <Link

@@ -35,11 +35,11 @@ function retryAll() {
             <div class="rounded-2xl bg-white p-4 ring-1 ring-black/5 lg:col-span-1">
                 <h2 class="mb-3 text-sm font-bold">پیکربندی</h2>
                 <dl class="space-y-2 text-sm">
-                    <div class="flex justify-between"><dt class="text-herb-900/50">درایور کاتالوگ</dt><dd class="font-medium">{{ config.catalog_driver }}</dd></div>
-                    <div class="flex justify-between"><dt class="text-herb-900/50">درایور سفارش</dt><dd class="font-medium">{{ config.order_driver }}</dd></div>
-                    <div class="flex justify-between"><dt class="text-herb-900/50">شماره پک</dt><dd class="font-medium" dir="ltr">{{ toFaDigits(config.pack_number) }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-herb-900/65">درایور کاتالوگ</dt><dd class="font-medium">{{ config.catalog_driver }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-herb-900/65">درایور سفارش</dt><dd class="font-medium">{{ config.order_driver }}</dd></div>
+                    <div class="flex justify-between"><dt class="text-herb-900/65">شماره پک</dt><dd class="font-medium" dir="ltr">{{ toFaDigits(config.pack_number) }}</dd></div>
                     <div class="flex justify-between">
-                        <dt class="text-herb-900/50">API حسابداری</dt>
+                        <dt class="text-herb-900/65">API حسابداری</dt>
                         <dd :class="config.api_configured ? 'text-herb-600' : 'text-amber-600'">
                             {{ config.api_configured ? 'پیکربندی‌شده' : 'در انتظار مستندات باران' }}
                         </dd>
@@ -56,15 +56,15 @@ function retryAll() {
             </div>
 
             <div class="rounded-2xl bg-white p-4 ring-1 ring-black/5 lg:col-span-2">
-                <h2 class="mb-3 text-sm font-bold">سفارش‌های در انتظار / ناموفق <span class="text-herb-900/40">({{ faNumber(failedOrders.length) }})</span></h2>
-                <div v-if="!failedOrders.length" class="py-6 text-center text-sm text-herb-900/40">همه‌ی سفارش‌ها همگام‌اند ✓</div>
+                <h2 class="mb-3 text-sm font-bold">سفارش‌های در انتظار / ناموفق <span class="text-herb-900/65">({{ faNumber(failedOrders.length) }})</span></h2>
+                <div v-if="!failedOrders.length" class="py-6 text-center text-sm text-herb-900/65">همه‌ی سفارش‌ها همگام‌اند ✓</div>
                 <table v-else class="w-full text-sm">
                     <tbody>
                         <tr v-for="o in failedOrders" :key="o.id" class="border-b border-black/5 last:border-0">
                             <td class="py-2"><Link :href="route('admin.orders.show', o.id)" class="font-medium text-herb-700">{{ o.number }}</Link></td>
                             <td class="py-2"><span :class="o.status === 'failed' ? 'text-anar-600' : 'text-amber-600'">{{ o.status }}</span></td>
-                            <td class="py-2 text-xs text-herb-900/50">{{ faNumber(o.attempts) }} تلاش</td>
-                            <td class="py-2 text-xs text-herb-900/45">{{ o.error }}</td>
+                            <td class="py-2 text-xs text-herb-900/65">{{ faNumber(o.attempts) }} تلاش</td>
+                            <td class="py-2 text-xs text-herb-900/65">{{ o.error }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -81,10 +81,10 @@ function retryAll() {
                                 <span :class="l.status === 'success' ? 'text-herb-600' : 'text-anar-600'">●</span>
                             </td>
                             <td class="py-1.5 font-medium">{{ l.event }}</td>
-                            <td class="py-1.5 text-herb-900/50">{{ l.direction }}</td>
-                            <td class="py-1.5 text-herb-900/50">{{ l.http_status ?? '—' }}</td>
-                            <td class="py-1.5 text-herb-900/60">{{ l.message }}</td>
-                            <td class="py-1.5 text-herb-900/40">{{ toFaDigits(l.created_at) }}</td>
+                            <td class="py-1.5 text-herb-900/65">{{ l.direction }}</td>
+                            <td class="py-1.5 text-herb-900/65">{{ l.http_status ?? '—' }}</td>
+                            <td class="py-1.5 text-herb-900/65">{{ l.message }}</td>
+                            <td class="py-1.5 text-herb-900/65">{{ toFaDigits(l.created_at) }}</td>
                         </tr>
                     </tbody>
                 </table>

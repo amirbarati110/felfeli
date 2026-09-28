@@ -25,8 +25,8 @@ function submit() {
 
     <AdminLayout>
         <div class="mb-6 flex flex-wrap items-center gap-2">
-            <Link :href="route('admin.categories.index')" class="text-sm text-herb-900/45">دسته‌بندی‌ها</Link>
-            <span class="text-herb-900/30">/</span>
+            <Link :href="route('admin.categories.index')" class="text-sm text-herb-900/65">دسته‌بندی‌ها</Link>
+            <span class="text-herb-900/65">/</span>
             <h1 class="text-xl font-extrabold">{{ isEdit ? form.name : 'دسته جدید' }}</h1>
         </div>
 
@@ -41,7 +41,7 @@ function submit() {
                 <p v-if="form.errors.name" class="mt-1 text-xs text-anar-600">{{ form.errors.name }}</p>
             </div>
             <div>
-                <label for="category-slug" class="mb-1.5 block text-sm font-medium">نامک (slug) <span class="text-xs font-normal text-herb-900/40">خالی = خودکار</span></label>
+                <label for="category-slug" class="mb-1.5 block text-sm font-medium">نامک (slug) <span class="text-xs font-normal text-herb-900/65">خالی = خودکار</span></label>
                 <input id="category-slug" v-model="form.slug" dir="ltr" class="h-11 w-full rounded-xl border-0 bg-paper-100 px-3 text-right text-base ring-1 ring-black/5 sm:text-sm" />
                 <p v-if="form.errors.slug" class="mt-1 text-xs text-anar-600">{{ form.errors.slug }}</p>
             </div>

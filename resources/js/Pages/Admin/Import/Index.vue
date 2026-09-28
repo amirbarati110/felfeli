@@ -21,7 +21,7 @@ function submit() {
         <div class="grid gap-4 lg:grid-cols-2">
             <form class="rounded-2xl bg-white p-5 ring-1 ring-black/5" @submit.prevent="submit">
                 <h2 class="text-sm font-bold">بارگذاری فایل CSV</h2>
-                <p class="mt-1 text-xs leading-relaxed text-herb-900/50">
+                <p class="mt-1 text-xs leading-relaxed text-herb-900/65">
                     فایل با کدگذاری UTF-8. ستون‌های الزامی: «کد کالا»، «نام»، «قیمت». دسته نبود ⇒ حدس خودکار.
                     upsert بر مبنای کد کالا انجام می‌شود.
                 </p>
@@ -42,16 +42,16 @@ function submit() {
                         <tr v-for="im in imports" :key="im.id" class="border-b border-black/5 last:border-0">
                             <td class="py-2">
                                 <Link :href="route('admin.import.show', im.id)" class="font-medium text-herb-700">{{ im.filename }}</Link>
-                                <div class="text-xs text-herb-900/40">{{ toFaDigits(im.created_at) }}</div>
+                                <div class="text-xs text-herb-900/65">{{ toFaDigits(im.created_at) }}</div>
                             </td>
                             <td class="py-2 text-xs">
                                 <span class="text-herb-600">+{{ faNumber(im.created_count) }}</span>
                                 <span class="ms-1 text-amber-600">~{{ faNumber(im.updated_count) }}</span>
-                                <span class="ms-1 text-herb-900/40">رد {{ faNumber(im.skipped_count) }}</span>
+                                <span class="ms-1 text-herb-900/65">رد {{ faNumber(im.skipped_count) }}</span>
                                 <span v-if="im.failed_count" class="ms-1 text-anar-600">خطا {{ faNumber(im.failed_count) }}</span>
                             </td>
                         </tr>
-                        <tr v-if="!imports.length"><td class="py-6 text-center text-herb-900/40">تاکنون درون‌ریزی‌ای انجام نشده</td></tr>
+                        <tr v-if="!imports.length"><td class="py-6 text-center text-herb-900/65">تاکنون درون‌ریزی‌ای انجام نشده</td></tr>
                     </tbody>
                 </table>
             </div>

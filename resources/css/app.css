@@ -93,7 +93,7 @@
     .price-tag > .unit {
         font-size: 0.68em;
         font-weight: 550;
-        color: color-mix(in oklab, var(--color-herb-900) 50%, transparent);
+        color: color-mix(in oklab, var(--color-herb-900) 68%, transparent);
     }
 }
 

@@ -16,7 +16,7 @@ function submit() {
             <h1 class="text-center text-lg font-extrabold text-herb-700">
                 فلفلی <span class="text-herb-500">ساوه</span>
             </h1>
-            <p class="mt-1 text-center text-xs text-herb-900/45">ورود به پنل مدیریت</p>
+            <p class="mt-1 text-center text-xs text-herb-900/65">ورود به پنل مدیریت</p>
 
             <form class="mt-6 space-y-4" @submit.prevent="submit">
                 <div>
@@ -34,7 +34,7 @@ function submit() {
                         class="h-12 w-full rounded-xl border-0 bg-paper-100 px-4 text-base outline-none ring-1 ring-black/5 focus:ring-2 focus:ring-herb-400 sm:text-sm"
                     />
                 </div>
-                <label class="flex min-h-11 items-center gap-2 text-sm text-herb-900/60">
+                <label class="flex min-h-11 items-center gap-2 text-sm text-herb-900/65">
                     <input v-model="form.remember" type="checkbox" class="rounded" />
                     مرا به خاطر بسپار
                 </label>

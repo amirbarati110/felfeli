@@ -104,7 +104,7 @@ function destroy(id) {
 
         <div v-if="products.data.length" class="hidden overflow-x-auto rounded-2xl border border-herb-100 bg-white shadow-sm md:block">
             <table class="w-full min-w-[680px] text-sm">
-                <thead class="border-b border-black/5 text-xs text-herb-900/50">
+                <thead class="border-b border-black/5 text-xs text-herb-900/65">
                     <tr>
                         <th class="p-3 text-right font-medium">کالا</th>
                         <th class="p-3 text-right font-medium">کد</th>
@@ -121,8 +121,8 @@ function destroy(id) {
                             <img :src="p.image_url" class="h-9 w-9 rounded-lg object-cover" @error="(e)=>e.target.src='/images/product-placeholder.svg'" />
                             <span class="font-medium">{{ p.name }}</span>
                         </td>
-                        <td class="p-3 text-herb-900/60">{{ p.sku }}</td>
-                        <td class="p-3 text-herb-900/60">{{ p.category ?? '—' }}</td>
+                        <td class="p-3 text-herb-900/65">{{ p.sku }}</td>
+                        <td class="p-3 text-herb-900/65">{{ p.category ?? '—' }}</td>
                         <td class="p-3">{{ tomanValue(p.price) }}</td>
                         <td class="p-3">
                             <span :class="p.in_stock ? 'text-herb-600' : 'text-anar-600'">
@@ -130,10 +130,10 @@ function destroy(id) {
                             </span>
                         </td>
                         <td class="p-3">
-                            <span class="rounded-full px-2 py-0.5 text-xs" :class="p.is_active ? 'bg-herb-50 text-herb-700' : 'bg-black/5 text-herb-900/40'">
+                            <span class="rounded-full px-2 py-0.5 text-xs" :class="p.is_active ? 'bg-herb-50 text-herb-700' : 'bg-black/5 text-herb-900/65'">
                                 {{ p.is_active ? 'فعال' : 'غیرفعال' }}
                             </span>
-                            <span v-if="p.source" class="ms-1 text-[10px] text-herb-900/30">{{ p.source }}</span>
+                            <span v-if="p.source" class="ms-1 text-[10px] text-herb-900/65">{{ p.source }}</span>
                         </td>
                         <td class="whitespace-nowrap p-3 text-left">
                             <Link :href="route('admin.products.edit', p.id)" class="text-xs font-medium text-herb-600">ویرایش</Link>

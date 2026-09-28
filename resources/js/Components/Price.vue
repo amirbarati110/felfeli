@@ -17,7 +17,7 @@ const sizeClass = { sm: 'text-base', md: 'text-lg', lg: 'text-2xl' };
 
 <template>
     <span class="inline-flex flex-col items-start leading-none">
-        <s v-if="compare" class="mb-0.5 text-[11px] font-medium text-anar-500/70">{{ compare }}</s>
+        <s v-if="compare" class="mb-0.5 text-[11px] font-medium text-anar-600/85">{{ compare }}</s>
         <span class="price-tag" :class="sizeClass[size]">
             {{ value }}<span v-if="unit" class="unit">تومان</span>
         </span>

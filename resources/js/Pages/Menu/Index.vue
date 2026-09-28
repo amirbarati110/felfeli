@@ -88,7 +88,7 @@ function goPage(url) {
 
                 <div class="mb-3 flex items-baseline justify-between">
                     <h1 class="text-lg font-extrabold text-herb-900">{{ title }}</h1>
-                    <span class="text-xs text-herb-900/45">{{ faNumber(products.total) }} کالا</span>
+                    <span class="text-xs text-herb-900/65">{{ faNumber(products.total) }} کالا</span>
                 </div>
 
                 <!-- بدون نتیجه -->
@@ -97,7 +97,7 @@ function goPage(url) {
                         <path d="M30 8c-8 0-14 6-14 15 0 8 5 13 12 13s12-6 12-14c0-8-5-14-10-14z" /><path d="M21 36c0-9-4-16-13-18 1 10 5 17 13 18z" />
                     </svg>
                     <p class="mt-3 text-sm font-semibold text-herb-900/75">چیزی پیدا نشد</p>
-                    <p class="mt-1 text-xs text-herb-900/45">شاید توی این دسته‌ها باشه:</p>
+                    <p class="mt-1 text-xs text-herb-900/65">شاید توی این دسته‌ها باشه:</p>
                     <div class="mt-4 flex flex-wrap justify-center gap-2">
                         <button
                             v-for="c in categories.slice(0, 6)" :key="c.slug"

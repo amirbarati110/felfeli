@@ -34,7 +34,7 @@ const badge = {
     <Head title="سفارش‌ها" />
 
     <AdminLayout>
-        <h1 class="mb-4 text-xl font-extrabold">سفارش‌ها <span class="text-sm font-medium text-herb-900/40">({{ faNumber(orders.total) }})</span></h1>
+        <h1 class="mb-4 text-xl font-extrabold">سفارش‌ها <span class="text-sm font-medium text-herb-900/65">({{ faNumber(orders.total) }})</span></h1>
 
         <div class="mb-3 grid gap-2 sm:grid-cols-3">
             <input v-model="f.q" placeholder="شماره، نام یا موبایل…" class="h-10 rounded-xl border-0 bg-white px-3 text-sm ring-1 ring-black/5 focus:ring-2 focus:ring-herb-400" />
@@ -50,7 +50,7 @@ const badge = {
 
         <div class="overflow-x-auto rounded-2xl bg-white ring-1 ring-black/5">
             <table class="w-full min-w-[720px] text-sm">
-                <thead class="border-b border-black/5 text-xs text-herb-900/50">
+                <thead class="border-b border-black/5 text-xs text-herb-900/65">
                     <tr>
                         <th class="p-3 text-right font-medium">شماره</th>
                         <th class="p-3 text-right font-medium">مشتری</th>
@@ -65,19 +65,19 @@ const badge = {
                 <tbody>
                     <tr v-for="o in orders.data" :key="o.id" class="cursor-pointer border-b border-black/5 last:border-0 hover:bg-paper-50" @click="router.get(route('admin.orders.show', o.id))">
                         <td class="p-3 font-medium text-herb-700">{{ o.number }}</td>
-                        <td class="p-3">{{ o.customer }}<div class="text-xs text-herb-900/45" dir="ltr">{{ toFaDigits(o.mobile) }}</div></td>
-                        <td class="p-3 text-herb-900/60">{{ faNumber(o.items_count) }}</td>
+                        <td class="p-3">{{ o.customer }}<div class="text-xs text-herb-900/65" dir="ltr">{{ toFaDigits(o.mobile) }}</div></td>
+                        <td class="p-3 text-herb-900/65">{{ faNumber(o.items_count) }}</td>
                         <td class="p-3">{{ tomanValue(o.total) }}</td>
-                        <td class="p-3 text-herb-900/60">{{ o.delivery_method }}</td>
+                        <td class="p-3 text-herb-900/65">{{ o.delivery_method }}</td>
                         <td class="p-3"><span class="rounded-full px-2 py-0.5 text-xs" :class="badge[o.status_color]">{{ o.status_label }}</span></td>
                         <td class="p-3">
                             <span class="text-xs" :class="o.integration === 'synced' ? 'text-herb-600' : o.integration === 'failed' ? 'text-anar-600' : 'text-amber-600'">
                                 {{ o.integration_label }}
                             </span>
                         </td>
-                        <td class="p-3 text-xs text-herb-900/45">{{ toFaDigits(o.created_at) }}</td>
+                        <td class="p-3 text-xs text-herb-900/65">{{ toFaDigits(o.created_at) }}</td>
                     </tr>
-                    <tr v-if="!orders.data.length"><td colspan="8" class="p-6 text-center text-herb-900/40">سفارشی یافت نشد</td></tr>
+                    <tr v-if="!orders.data.length"><td colspan="8" class="p-6 text-center text-herb-900/65">سفارشی یافت نشد</td></tr>
                 </tbody>
             </table>
         </div>

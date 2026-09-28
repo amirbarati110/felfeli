@@ -64,7 +64,7 @@ function submit() {
                         <button
                             v-if="checkout.delivery_enabled" type="button"
                             class="min-h-12 rounded-xl border-2 px-3 py-3 text-sm font-semibold transition"
-                            :class="form.delivery_method === 'delivery' ? 'border-herb-500 bg-herb-50 text-herb-700' : 'border-kraft-200 text-herb-900/55'"
+                            :class="form.delivery_method === 'delivery' ? 'border-herb-500 bg-herb-50 text-herb-700' : 'border-kraft-200 text-herb-900/65'"
                             :aria-pressed="form.delivery_method === 'delivery'"
                             @click="form.delivery_method = 'delivery'"
                         >
@@ -73,7 +73,7 @@ function submit() {
                         <button
                             v-if="checkout.pickup_enabled" type="button"
                             class="min-h-12 rounded-xl border-2 px-3 py-3 text-sm font-semibold transition"
-                            :class="form.delivery_method === 'pickup' ? 'border-herb-500 bg-herb-50 text-herb-700' : 'border-kraft-200 text-herb-900/55'"
+                            :class="form.delivery_method === 'pickup' ? 'border-herb-500 bg-herb-50 text-herb-700' : 'border-kraft-200 text-herb-900/65'"
                             :aria-pressed="form.delivery_method === 'pickup'"
                             @click="form.delivery_method = 'pickup'"
                         >
@@ -90,15 +90,15 @@ function submit() {
                 </div>
 
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">
-                    <label for="order-note" class="mb-1.5 block text-sm font-semibold text-herb-900">توضیحات سفارش <span class="font-normal text-herb-900/40">(اختیاری)</span></label>
+                    <label for="order-note" class="mb-1.5 block text-sm font-semibold text-herb-900">توضیحات سفارش <span class="font-normal text-herb-900/65">(اختیاری)</span></label>
                     <textarea id="order-note" v-model="form.note" rows="2" class="w-full rounded-xl border border-kraft-200 bg-paper-50 p-4 text-base outline-none focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:text-sm" />
                 </div>
 
                 <div class="rounded-card border border-kraft-200/70 bg-white p-4">
-                    <div class="flex justify-between text-sm text-herb-900/60">
+                    <div class="flex justify-between text-sm text-herb-900/65">
                         <span>جمع کالاها</span><span>{{ tomanValue(subtotal) }} تومان</span>
                     </div>
-                    <div v-if="form.delivery_method === 'delivery'" class="mt-1 flex justify-between text-sm text-herb-900/60">
+                    <div v-if="form.delivery_method === 'delivery'" class="mt-1 flex justify-between text-sm text-herb-900/65">
                         <span>هزینه ارسال</span>
                         <span>{{ deliveryFee ? tomanValue(deliveryFee) + ' تومان' : 'هماهنگی با فروشگاه' }}</span>
                     </div>
@@ -115,7 +115,7 @@ function submit() {
                     {{ form.processing ? 'در حال ثبت…' : 'ثبت و ارسال سفارش' }}
                 </button>
 
-                <Link :href="route('cart.show')" class="block text-center text-xs font-medium text-herb-900/45">بازگشت به سبد</Link>
+                <Link :href="route('cart.show')" class="block text-center text-xs font-medium text-herb-900/65">بازگشت به سبد</Link>
             </form>
         </div>
     </ShopLayout>

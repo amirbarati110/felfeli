@@ -132,7 +132,7 @@ onBeforeUnmount(() => {
 <template>
     <form class="relative w-full" role="search" @submit.prevent="submitFromForm" @focusout="closeAfterFocusLeaves">
         <svg
-            class="pointer-events-none absolute end-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-herb-900/35"
+            class="pointer-events-none absolute end-3.5 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-herb-900/65"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
         >
             <circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" />
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
             aria-controls="shop-search-results"
             :aria-expanded="open"
             :aria-activedescendant="activeIndex >= 0 ? `shop-search-result-${activeIndex}` : undefined"
-            class="h-12 w-full rounded-full border border-kraft-200 bg-white pe-11 text-base text-herb-900 shadow-sm outline-none transition placeholder:text-herb-900/40 focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:h-11 sm:text-sm"
+            class="h-12 w-full rounded-full border border-kraft-200 bg-white pe-11 text-base text-herb-900 shadow-sm outline-none transition placeholder:text-herb-900/65 focus:border-herb-400 focus:ring-2 focus:ring-herb-300/50 sm:h-11 sm:text-sm"
             :class="term ? 'ps-11' : 'ps-4'"
             @focus="term.trim().length >= 2 && (open = true)"
             @keydown="onKeydown"
@@ -158,7 +158,7 @@ onBeforeUnmount(() => {
         <button
             v-if="term"
             type="button"
-            class="absolute start-1.5 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full text-herb-900/60 transition hover:bg-herb-50 hover:text-herb-900"
+            class="absolute start-1.5 top-1/2 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full text-herb-900/65 transition hover:bg-herb-50 hover:text-herb-900"
             aria-label="پاک کردن"
             @click="term = ''"
         >
@@ -172,7 +172,7 @@ onBeforeUnmount(() => {
             class="absolute inset-x-0 top-[calc(100%+0.5rem)] z-50 max-h-[min(26rem,65vh)] overflow-y-auto rounded-2xl border border-kraft-200 bg-white p-2 shadow-2xl shadow-herb-900/15"
             :aria-busy="loading"
         >
-            <p v-if="loading" class="px-3 py-4 text-center text-sm text-herb-900/55">در حال جست‌وجو…</p>
+            <p v-if="loading" class="px-3 py-4 text-center text-sm text-herb-900/65">در حال جست‌وجو…</p>
             <template v-else-if="suggestions.length">
                 <button
                     v-for="(product, index) in suggestions"
@@ -204,7 +204,7 @@ onBeforeUnmount(() => {
                     نمایش همه نتایج «{{ term.trim() }}»
                 </button>
             </template>
-            <p v-else class="px-3 py-4 text-center text-sm text-herb-900/55">کالایی با این عبارت پیدا نشد.</p>
+            <p v-else class="px-3 py-4 text-center text-sm text-herb-900/65">کالایی با این عبارت پیدا نشد.</p>
         </div>
     </form>
 </template>

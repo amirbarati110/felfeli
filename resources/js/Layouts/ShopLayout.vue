@@ -117,7 +117,7 @@ const isMenu = computed(() => /\/menu(?:\?|$)/.test(loc.value));
                 <Link
                     :href="route('menu.index')"
                     class="flex min-h-16 flex-1 flex-col items-center justify-center gap-1 py-2 text-xs font-semibold transition"
-                    :class="isMenu && !onCartFlow ? 'text-herb-700' : 'text-herb-900/60'"
+                    :class="isMenu && !onCartFlow ? 'text-herb-700' : 'text-herb-900/65'"
                     :aria-current="isMenu && !onCartFlow ? 'page' : undefined"
                 >
                     <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h10" /></svg>
@@ -126,7 +126,7 @@ const isMenu = computed(() => /\/menu(?:\?|$)/.test(loc.value));
                 <Link
                     :href="route('cart.show')"
                     class="flex min-h-16 flex-1 flex-col items-center justify-center gap-1 py-2 text-xs font-semibold transition"
-                    :class="onCartFlow ? 'text-herb-700' : 'text-herb-900/60'"
+                    :class="onCartFlow ? 'text-herb-700' : 'text-herb-900/65'"
                     :aria-current="onCartFlow ? 'page' : undefined"
                 >
                     <span class="relative">

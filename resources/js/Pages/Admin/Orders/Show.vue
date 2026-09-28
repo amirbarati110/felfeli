@@ -26,8 +26,8 @@ function retrySync() {
 
     <AdminLayout>
         <div class="mb-4 flex items-center gap-2">
-            <Link :href="route('admin.orders.index')" class="text-sm text-herb-900/45">سفارش‌ها</Link>
-            <span class="text-herb-900/30">/</span>
+            <Link :href="route('admin.orders.index')" class="text-sm text-herb-900/65">سفارش‌ها</Link>
+            <span class="text-herb-900/65">/</span>
             <h1 class="text-xl font-extrabold">{{ order.order_number }}</h1>
         </div>
 
@@ -38,15 +38,15 @@ function retrySync() {
                     <table class="w-full text-sm">
                         <tbody>
                             <tr v-for="(it, i) in order.items" :key="i" class="border-b border-black/5 last:border-0">
-                                <td class="py-2">{{ it.product_name }}<span class="ms-1 text-xs text-herb-900/40" dir="ltr">#{{ it.sku }}</span></td>
-                                <td class="py-2 text-herb-900/60">× {{ faNumber(it.quantity) }}</td>
+                                <td class="py-2">{{ it.product_name }}<span class="ms-1 text-xs text-herb-900/65" dir="ltr">#{{ it.sku }}</span></td>
+                                <td class="py-2 text-herb-900/65">× {{ faNumber(it.quantity) }}</td>
                                 <td class="py-2 text-left">{{ tomanValue(it.line_total) }} ت</td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="mt-3 space-y-1 border-t border-black/5 pt-3 text-sm">
-                        <div class="flex justify-between text-herb-900/60"><span>جمع کالاها</span><span>{{ tomanValue(order.subtotal) }} ت</span></div>
-                        <div class="flex justify-between text-herb-900/60"><span>هزینه ارسال</span><span>{{ tomanValue(order.delivery_fee) }} ت</span></div>
+                        <div class="flex justify-between text-herb-900/65"><span>جمع کالاها</span><span>{{ tomanValue(order.subtotal) }} ت</span></div>
+                        <div class="flex justify-between text-herb-900/65"><span>هزینه ارسال</span><span>{{ tomanValue(order.delivery_fee) }} ت</span></div>
                         <div class="flex justify-between font-extrabold"><span>جمع کل</span><span>{{ tomanValue(order.total) }} ت</span></div>
                     </div>
                 </div>
@@ -63,8 +63,8 @@ function retrySync() {
                         <span :class="order.integration_status === 'synced' ? 'text-herb-600' : order.integration_status === 'failed' ? 'text-anar-600' : 'text-amber-600'">
                             {{ order.integration_label }}
                         </span>
-                        <span class="text-xs text-herb-900/40"> · {{ faNumber(order.integration_attempts) }} تلاش</span>
-                        <span v-if="order.integration_reference" class="text-xs text-herb-900/40"> · سند {{ toFaDigits(order.integration_reference) }}</span>
+                        <span class="text-xs text-herb-900/65"> · {{ faNumber(order.integration_attempts) }} تلاش</span>
+                        <span v-if="order.integration_reference" class="text-xs text-herb-900/65"> · سند {{ toFaDigits(order.integration_reference) }}</span>
                     </p>
                     <p v-if="order.integration_last_error" class="mt-1 text-xs text-anar-600">{{ order.integration_last_error }}</p>
                     <button
@@ -80,9 +80,9 @@ function retrySync() {
                     <div v-if="order.logs.length" class="mt-3 space-y-1 border-t border-black/5 pt-3">
                         <div v-for="(l, i) in order.logs" :key="i" class="flex items-center gap-2 text-xs">
                             <span :class="l.status === 'success' ? 'text-herb-600' : 'text-anar-600'">●</span>
-                            <span class="text-herb-900/60">{{ l.event }}</span>
-                            <span class="text-herb-900/40">{{ toFaDigits(l.created_at) }}</span>
-                            <span v-if="l.message" class="text-herb-900/50">— {{ l.message }}</span>
+                            <span class="text-herb-900/65">{{ l.event }}</span>
+                            <span class="text-herb-900/65">{{ toFaDigits(l.created_at) }}</span>
+                            <span v-if="l.message" class="text-herb-900/65">— {{ l.message }}</span>
                         </div>
                     </div>
                 </div>
@@ -92,11 +92,11 @@ function retrySync() {
                 <div class="rounded-2xl bg-white p-4 ring-1 ring-black/5">
                     <h2 class="mb-2 text-sm font-bold">مشتری</h2>
                     <p class="text-sm">{{ order.customer_name }}</p>
-                    <p class="text-sm text-herb-900/60" dir="ltr">{{ toFaDigits(order.customer_mobile) }}</p>
-                    <p class="mt-2 text-xs text-herb-900/50">روش: {{ order.delivery_method }}</p>
+                    <p class="text-sm text-herb-900/65" dir="ltr">{{ toFaDigits(order.customer_mobile) }}</p>
+                    <p class="mt-2 text-xs text-herb-900/65">روش: {{ order.delivery_method }}</p>
                     <p v-if="order.address" class="mt-1 text-sm text-herb-900/70">{{ order.address }}</p>
-                    <p v-if="order.note" class="mt-2 rounded-lg bg-paper-100 p-2 text-xs text-herb-900/60">یادداشت: {{ order.note }}</p>
-                    <p class="mt-2 text-xs text-herb-900/40">ثبت: {{ toFaDigits(order.created_at) }}</p>
+                    <p v-if="order.note" class="mt-2 rounded-lg bg-paper-100 p-2 text-xs text-herb-900/65">یادداشت: {{ order.note }}</p>
+                    <p class="mt-2 text-xs text-herb-900/65">ثبت: {{ toFaDigits(order.created_at) }}</p>
                 </div>
 
                 <div class="rounded-2xl bg-white p-4 ring-1 ring-black/5">

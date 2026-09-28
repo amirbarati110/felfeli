@@ -19,7 +19,7 @@ defineProps({
             </div>
 
             <h1 class="mt-4 text-xl font-extrabold text-herb-900">سفارش شما ثبت شد</h1>
-            <p class="mt-1 text-sm text-herb-900/55">
+            <p class="mt-1 text-sm text-herb-900/65">
                 شماره سفارش:
                 <span class="font-bold text-herb-700">#{{ toFaDigits(order.number.replace('FS-', '')) }}</span>
             </p>
@@ -42,7 +42,7 @@ defineProps({
                     <span class="text-sm font-bold text-herb-900">جمع کل</span>
                     <span class="price-tag text-lg">{{ tomanValue(order.total) }}<span class="unit">تومان</span></span>
                 </div>
-                <p class="mt-2 text-xs text-herb-900/50">روش دریافت: {{ order.delivery_method_label }}</p>
+                <p class="mt-2 text-xs text-herb-900/65">روش دریافت: {{ order.delivery_method_label }}</p>
             </div>
 
             <Link :href="route('menu.index')" class="mt-6 inline-block rounded-full bg-herb-600 px-6 py-3 text-sm font-extrabold text-white">

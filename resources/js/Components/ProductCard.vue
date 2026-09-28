@@ -56,7 +56,7 @@ const inCart = computed(() => qty.value > 0);
                     v-else
                     type="button"
                     :disabled="!product.in_stock"
-                    class="flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-zaffron-400 px-2 text-sm font-extrabold text-herb-900 shadow-sm transition hover:bg-zaffron-500 active:bg-zaffron-500 disabled:cursor-not-allowed disabled:bg-kraft-200 disabled:text-herb-900/50"
+                    class="flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl bg-zaffron-400 px-2 text-sm font-extrabold text-herb-900 shadow-sm transition hover:bg-zaffron-500 active:bg-zaffron-500 disabled:cursor-not-allowed disabled:bg-kraft-200 disabled:text-herb-900/65"
                     :aria-label="`افزودن ${product.name} به سبد`"
                     @click="cart.add(product.sku)"
                 >

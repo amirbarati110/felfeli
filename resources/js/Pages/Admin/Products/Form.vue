@@ -40,8 +40,8 @@ function submit() {
 
     <AdminLayout>
         <div class="mb-6 flex flex-wrap items-center gap-2">
-            <Link :href="route('admin.products.index')" class="text-sm text-herb-900/45">محصولات</Link>
-            <span class="text-herb-900/30">/</span>
+            <Link :href="route('admin.products.index')" class="text-sm text-herb-900/65">محصولات</Link>
+            <span class="text-herb-900/65">/</span>
             <h1 class="text-xl font-extrabold">{{ isEdit ? form.name : 'محصول جدید' }}</h1>
         </div>
 
@@ -79,7 +79,7 @@ function submit() {
                     <input id="product-name" v-model="form.name" class="h-11 w-full rounded-xl border-0 bg-paper-100 px-3 text-base ring-1 ring-black/5 focus:ring-2 focus:ring-herb-400 sm:text-sm" />
                     <p v-if="form.errors.name" class="mt-1 text-xs text-anar-600">{{ form.errors.name }}</p>
 
-                    <label for="product-sku" class="mt-3 mb-1.5 block text-sm font-medium">کد کالا / SKU * <span class="text-xs font-normal text-herb-900/40">(مبنای اتصال به باران)</span></label>
+                    <label for="product-sku" class="mt-3 mb-1.5 block text-sm font-medium">کد کالا / SKU * <span class="text-xs font-normal text-herb-900/65">(مبنای اتصال به باران)</span></label>
                     <input id="product-sku" v-model="form.sku" dir="ltr" class="h-11 w-full rounded-xl border-0 bg-paper-100 px-3 text-right text-base ring-1 ring-black/5 focus:ring-2 focus:ring-herb-400 sm:text-sm" />
                     <p v-if="form.errors.sku" class="mt-1 text-xs text-anar-600">{{ form.errors.sku }}</p>
 

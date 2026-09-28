@@ -36,7 +36,7 @@ const currentTitle = () => navGroups.flatMap((group) => group.items).find((item)
             >
                 <div class="flex h-20 items-center gap-2 border-b border-herb-100 px-5">
                     <span class="text-base font-extrabold text-herb-700">فلفلی <span class="text-herb-500">ساوه</span></span>
-                    <span class="rounded-full bg-paper-100 px-2 py-0.5 text-[11px] font-bold text-herb-900/50">مدیریت</span>
+                    <span class="rounded-full bg-paper-100 px-2 py-0.5 text-[11px] font-bold text-herb-900/65">مدیریت</span>
                 </div>
                 <nav class="min-h-0 flex-1 space-y-5 overflow-y-auto p-3" aria-label="منوی مدیریت">
                     <div v-for="group in navGroups" :key="group.title">
@@ -55,7 +55,7 @@ const currentTitle = () => navGroups.flatMap((group) => group.items).find((item)
                     </div>
                 </nav>
                 <div class="border-t border-herb-100 p-3">
-                    <a :href="route('menu.index')" target="_blank" class="block rounded-xl px-3.5 py-2 text-xs font-medium text-herb-900/50 hover:bg-paper-100">
+                    <a :href="route('menu.index')" target="_blank" class="block rounded-xl px-3.5 py-2 text-xs font-medium text-herb-900/65 hover:bg-paper-100">
                         مشاهده فروشگاه ↗
                     </a>
                     <button type="button"
