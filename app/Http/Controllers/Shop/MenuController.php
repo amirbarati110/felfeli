@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Shop;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Product;
+use App\Support\ProductSearch;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -17,22 +19,23 @@ class MenuController extends Controller
      */
     public function index(Request $request): Response
     {
-        $q = $this->normalize((string) $request->string('q'));
+        $q = ProductSearch::normalized((string) $request->string('q'));
         $categorySlug = $request->string('category')->toString();
 
         $category = $categorySlug
             ? Category::active()->where('slug', $categorySlug)->first()
             : null;
 
-        $products = Product::query()
+        $productsQuery = Product::query()
             ->visible()
             ->with('category:id,name,slug')
-            ->when($category, fn ($query) => $query->where('category_id', $category->id))
-            ->when($q !== '', function ($query) use ($q) {
-                foreach (preg_split('/\s+/', $q) as $term) {
-                    $query->where('name', 'like', "%{$term}%");
-                }
-            })
+            ->when($category, fn ($query) => $query->where('category_id', $category->id));
+
+        if ($q !== '') {
+            ProductSearch::apply($productsQuery, $q);
+        }
+
+        $products = $productsQuery
             ->ordered()
             ->paginate(24)
             ->withQueryString()
@@ -58,6 +61,28 @@ class MenuController extends Controller
         ]);
     }
 
+    public function suggestions(Request $request): JsonResponse
+    {
+        $q = ProductSearch::normalized((string) $request->string('q'));
+
+        if (mb_strlen($q) < 2) {
+            return response()->json(['data' => []]);
+        }
+
+        $products = ProductSearch::apply(Product::query()->visible(), $q)
+            ->ordered()
+            ->limit(8)
+            ->get()
+            ->map(fn (Product $product) => [
+                'sku' => $product->sku,
+                'name' => $product->name,
+                'price' => $product->price,
+                'image_url' => $product->image_url,
+            ]);
+
+        return response()->json(['data' => $products]);
+    }
+
     protected function categories(): array
     {
         return Category::active()
@@ -71,14 +96,5 @@ class MenuController extends Controller
                 'count' => $c->products_count,
             ])
             ->all();
-    }
-
-    /** یکسان‌سازی ورودی فارسی: ي→ی ، ك→ک ، حذف نیم‌فاصله‌ی اضافی */
-    protected function normalize(string $value): string
-    {
-        $value = str_replace(['ي', 'ك', 'ﻙ', 'ﮐ', "\u{200c}"], ['ی', 'ک', 'ک', 'ک', ' '], $value);
-        $value = preg_replace('/\s+/', ' ', $value);
-
-        return trim($value);
     }
 }

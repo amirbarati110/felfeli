@@ -18,6 +18,9 @@ require __DIR__.'/admin.php';
 
 Route::get('/', LandingController::class)->name('home');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu.index');
+Route::get('/menu/suggestions', [MenuController::class, 'suggestions'])
+    ->middleware('throttle:120,1')
+    ->name('menu.suggestions');
 
 Route::get('/product-images/{filename}', function (string $filename) {
     $path = "products/{$filename}";
